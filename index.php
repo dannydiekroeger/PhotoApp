@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>VoteCasterFail</title> 
+	<title>InstaBook</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -12,7 +12,7 @@
 
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="upstart.png">
+	<link rel="apple-touch-startup-image" href="startup.png">
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
@@ -26,29 +26,18 @@
 <div data-role="page" id="one">
 
 	<div data-role="header">
-		<h1>Multi-Page</h1>
+		<h1>InstaBook</h1>
 	</div><!-- /header -->
 
 	<div data-role="content">	
-		<h2>Welcome <span id="username"></span></h2>
-		
-		<p>The neat thing about this example is that you can swipe right and left to navigate between pages, and you can also see in the code that the entire three page sequence within here is bundled into one page.</p>	
 
-		<h3>Show internal pages:</h3>
-		<p><a href="#two" data-role="button">Show page "two"</a></p>	
-		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
-	</div><!-- /content -->
+		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Event</a></p>
+		<br/><br/><br/><br/>
+		<p><a href="#two" data-role="button">My Events</a></p>
+		<p><a href="#settings" data-role="button">Settings</a></p>		
+<!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
+	</div><!-- /content --> 
 	
-	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="nav-glyphish-example" data-grid="c">
-			<ul>
-				<li><a href="index.php" id="home" data-icon="custom" class="ui-btn-active">Home</a></li>
-				<li><a href="login.php" id="key" data-icon="custom">Login</a></li>
-				<li><a href="filter.php" id="beer" data-icon="custom">Filter</a></li>
-				<li><a href="#" id="skull" data-icon="custom">Settings</a></li>
-			</ul>
-		</div>
-	</div>
 </div>
 	
 </div><!-- /page one -->
@@ -68,18 +57,7 @@
 		<p><a href="#one" data-direction="reverse" data-role="button" data-theme="b">Back to page "one"</a></p>	
 		
 	</div><!-- /content -->
-	
-	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="nav-glyphish-example" data-grid="c">
-		
-		<ul>
-			<li><a href="index.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="login.php" id="key" data-icon="custom" class="ui-btn-active">Login</a></li>
-			<li><a href="filter.php" id="beer" data-icon="custom">Filter</a></li>
-			<li><a href="#" id="skull" data-icon="custom">Settings</a></li>
-		</ul>
-		</div>
-	</div>
+
 </div>
 </div><!-- /page two -->
 
@@ -92,21 +70,17 @@
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">	
-		<h2>Popup</h2>
-		<p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>		
-		<p><a href="#one" data-rel="back" data-role="button" data-inline="true" data-icon="back">Back to page "one"</a></p>	
+		<h2>Create an Event</h2>
+		<form action="enter.php" method="post">
+			<label for="foo">Event Name:</label>
+			<input type="text" name="username" id="foo">
+			<label for="bar">Add Friend:</label>
+			<input type="text" name="friend" id="bar">
+	        <input type="submit" value="Create Event">
+			</form>			
+		<p><a href="#one" data-role="button" data-icon="minus">Cancel</a></p>	
 	</div><!-- /content -->
-	
-	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="nav-glyphish-example" data-grid="c">
-		<ul>
-			<li><a href="index.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="login.php" id="key" data-icon="custom">Login</a></li>
-			<li><a href="filter.php" id="beer" data-icon="custom" class="ui-btn-active">Filter</a></li>
-			<li><a href="#" id="skull" data-icon="custom">Settings</a></li>
-		</ul>
-		</div>
-	</div>
+
 </div>
 </div><!-- /page popup -->
 
