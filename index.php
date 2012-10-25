@@ -13,7 +13,7 @@
 
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="images/ajax-loader.gif" />
-	<link rel="apple-touch-startup-image" href="takephotobutton.png">
+	<link rel="apple-touch-startup-image" href="images/merge.png">
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
@@ -100,7 +100,7 @@
 	<div data-role="content">	
 		<h2>Sample Event</h2>
 		<p>This is a sample event</p>	
-		<img src="takephotobutton.png"></img>
+		<img src="images/takephotobutton.png"></img>
 		<a data-role="button" data-theme="b" data-icon="star" data-pos="right">Take Picture</a>	
 		
 		<a href="#eventgallery" data-role="button" data-theme="b">Event Gallery</a>	
