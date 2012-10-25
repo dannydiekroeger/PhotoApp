@@ -51,9 +51,23 @@
 	</div><!-- /header -->
 
 	<div data-role="content">	
-		<h2>My Events</h2>
 		<p>Here will be a list of all your events</p>
-		
+		<ul data-role="listview"  data-inset="true">
+		<img src="icons/buy.png" alt="Buy" class="ui-li-icon">
+			<li>
+			<a href="#eventgallery"><img src="images/WaterColor.Sunset.JPG" alt="Pic" class="ui-li-thumbnail">Florida Vacation</a>
+			</li>
+			<li>
+			<a href="#eventgallery"><img src="images/mom.JPG" alt="mom" class="ui-li-thumbnail">Baseball Game</a>
+			</li>
+			<li>
+			<a href="#eventgallery"><img src="images/obama.jpeg" alt="obamapic" class="ui-li-thumbnail">Dinner with Barack</a>
+			</li>
+			<li>
+			<a href="#eventgallery"><img src="images/romney.png" alt="romneypic" class="ui-li-thumbnail">Lunch with Mitt</a>
+			</li>
+		</ul>
+
 	</div><!-- /content -->
 
 </div>
