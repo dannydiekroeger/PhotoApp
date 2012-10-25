@@ -100,7 +100,7 @@
 	<div data-role="content">	
 		<h2>Sample Event</h2>
 		<p>This is a sample event</p>	
-		<img src="takephotobutton.jpg"></img>
+		<img src="takephotobutton.png"></img>
 		<a data-role="button" data-theme="b" data-icon="star" data-pos="right">Take Picture</a>	
 		
 		<a href="#eventgallery" data-role="button" data-theme="b">Event Gallery</a>	
