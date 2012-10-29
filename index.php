@@ -35,7 +35,8 @@
 		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Event</a></p>
 		<br/><br/><br/><br/>
 		<p><a href="#myevents" data-role="button">My Events</a></p>
-		<p><a href="#settings" data-role="button">Settings</a></p>		
+		<p><a href="#settings" data-role="button">Settings</a></p>
+		<p><a href="#invitations" data-role="button">Event Invitations</a></p>			
 <!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
 	</div><!-- /content --> 
 	
@@ -89,6 +90,37 @@
 
 </div>
 </div><!-- end Settings page-->
+
+<!-- Invite page-->
+<div data-role="page" id="invitations" data-add-back-btn="true">
+
+	<div data-role="header">
+		<h1>Event Invation</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>Jamin has invited you to</p>	
+		<h2>Danny's Birthday Dinner</h2>
+		<a href="#event" data-role="button" data-theme="b" data-icon="check" data-pos="right">Join Event</a>
+		<a href="#confirm" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Decline Invite</a>		
+	</div><!-- /content -->
+</div>
+</div><!-- end Invite page-->
+
+<!-- confirm popup-->
+<div data-role="page" id="confirm">
+
+	<div data-role="header">
+		<h1>confirmation</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<h2>Are you sure you want to decline the invite?</h2>
+		<a href="#one" data-role="button" data-theme="d" data-pos="right">Yes, Decline</a>
+		<a href="#invitations" data-role="button" data-theme="d" data-pos="right"> No, Reconsider</a>		
+	</div><!-- /content -->
+</div>
+</div><!-- end confirm popup-->
 
 <!-- Event page-->
 <div data-role="page" id="event">
