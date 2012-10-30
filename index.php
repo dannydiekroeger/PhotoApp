@@ -132,10 +132,48 @@
 	<div data-role="content">	
 		<h2>Sample Event</h2>
 		<p>This is a sample event</p>	
-		<img src="images/takephotobutton.png"></img>
-		<a data-role="button" data-theme="b" data-icon="star" data-pos="right">Take Picture</a>	
+		<a data-role="button" data-theme="b" data-icon="star" data-pos="right">Take Picture</a>
 		
-		<a href="#eventgallery" data-role="button" data-theme="b">Event Gallery</a>	
+		
+	<!--Camera access -->	
+		<div class="container">
+            
+            <div class="upload_form_cont">
+                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
+                    <div>
+                        <div><label for="image_file">Please select image file</label></div>
+                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();" /></div>
+                    </div>
+                    <div>
+                        <input type="button" value="Upload" onclick="startUploading()" />
+                    </div>
+                    <div id="fileinfo">
+                        <div id="filename"></div>
+                        <div id="filesize"></div>
+                        <div id="filetype"></div>
+                        <div id="filedim"></div>
+                    </div>
+
+                    <div id="progress_info">
+                        <div id="progress"></div>
+                        <div id="progress_percent">&nbsp;</div>
+                        <div class="clear_both"></div>
+                        <div>
+                            <div id="speed">&nbsp;</div>
+                            <div id="remaining">&nbsp;</div>
+                            <div id="b_transfered">&nbsp;</div>
+                            <div class="clear_both"></div>
+                        </div>
+                        <div id="upload_response"></div>
+                    </div>
+                </form>
+
+                <img id="preview" />
+            </div>
+        </div>	
+		<!-- end camera access-->
+		
+		<a href="#eventgallery" data-role="button" data-theme="d">Event Gallery</a>	
 		
 		<p><a href="#one" data-direction="reverse" data-role="button">Leave Event</a></p>	
 		
