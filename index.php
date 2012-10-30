@@ -3,7 +3,7 @@
 <!-- cboskii baby!! Jamin-->
 
 <head>
-	<title>InstaBook</title> 
+	<title>Trail Mix</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 
 	<link rel="stylesheet" href="style.css" />
-	<link rel="apple-touch-icon" href="images/ajax-loader.gif" />
-	<link rel="apple-touch-startup-image" href="images/merge.png">
+	<link rel="apple-touch-icon" href="images/trailmixicon.jpg" />
+	<link rel="apple-touch-startup-image" href="images/backsmall.png">
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
@@ -27,7 +27,7 @@
 <div data-role="page" id="one">
 
 	<div data-role="header">
-		<h1>InstaBook</h1>
+		<h1>Trail Mix</h1>
 	</div><!-- /header -->
 
 	<div data-role="content">	
@@ -117,7 +117,7 @@
 	<div data-role="content">	
 		<h2>Are you sure you want to decline the invite?</h2>
 		<a href="#one" data-role="button" data-theme="d" data-pos="right">Yes, Decline</a>
-		<a href="#invitations" data-role="button" data-theme="d" data-pos="right"> No, Reconsider</a>		
+		<a href="#invitations" data-role="button" data-theme="d" data-pos="right">Let me reconsider</a>		
 	</div><!-- /content -->
 </div>
 </div><!-- end confirm popup-->
