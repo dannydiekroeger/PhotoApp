@@ -151,17 +151,25 @@
                 <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
                     <div>
                         <div><h2 for="image_file">Take or Upload a Photo!</h2>
+                        
+                        <!--
                         <h5> Press "Choose File" to take/upload a photo
                          and then press "Add Photo to Album"</h5>
+                         -->
                         </div>
                         
                         </br>
-                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();" /></div>
+                        <input type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
+                        <!-- make it upload right away, not "fileSelected()" 
+                        onchange="startUploading();"-->
+                        <div><input type="file" name="image_file" id="image_file" onchange="#Albumgallery" style="display:none"/></div>
                     </div>
+                    <!--
                     <div>
                     </br>
-                        <input type="button" value="Add Photo to Album" onclick="startUploading()" />
+                    <input type="button" value="Add Photo to Album" onclick="startUploading()" />
                     </div>
+                    -->
                     </br></br>
 <a href="#Albumgallery" data-role="button" data-theme="d">Album Gallery</a>	
            	<p><a href="#confirmAlbumbLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>	
@@ -246,9 +254,18 @@
 </div><!-- /page popup -->
 
 <script type="text/javascript">
+
+function uploadButton() {
+	$('#image_file').trigger('click');
+	startUploading();
+}
+
 // This handles all the swiping between each page. You really
 // needn't understand it all.
 /*
+
+
+
 $(document).on('pageshow', 'div:jqmData(role="page")', function(){
 
      var page = $(this), nextpage, prevpage;
