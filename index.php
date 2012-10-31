@@ -203,7 +203,17 @@
 
 	<div data-role="content">	
 		<h2>Album Gallery</h2>
-		<p>Here are all the pictures you have taken for this Album!</p>	
+		<div class="ui-grid-b">
+			<div class="ui-block-a"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-a"> <img src="images/romney.png"> </div>
+			<div class="ui-block-b"> <img src="images/romney.png"> </div>
+			<div class="ui-block-c"> <img src="images/romney.png"> </div>
+			<div class="ui-block-a"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
+		</div>
 		
 	</div><!-- /content -->
 
