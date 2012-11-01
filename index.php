@@ -22,6 +22,7 @@
 
 	
 <body>
+<!--
 <div id="fb-root"></div>
 		<div id="login">
      		<p><button onClick="loginUser();">Login</button></p>
@@ -30,7 +31,7 @@
      	<div id="user-info"></div>
      		<p><button  onClick="FB.logout();">Logout</button></p>
    		</div>
-
+-->
 <!-- This style is for Facebook login/logout stuff -->
 <style>
     body.connected #login { display: none; }
@@ -39,31 +40,6 @@
     body.not_connected #logout { display: none; }
 </style>
  
-<div data-role="page" id="login">
-
-	<div data-role="header">
-		<h1>Facebook Login</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">	
-
-	<div class="container">
-		<div class="loginform_cont">
-			<form id="login_form" enctype="multipart/form-data" method="post" action="#one">
-				<input type="button" value="login" onclick="loginUser()" />
-			</form>
-		</div>
-	</div>	
-
-
-		<p><a href="#invitations" data-role="button">Album Invitations</a></p>			
-<!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
-	</div><!-- /content --> 
-	
-	</div>
-
-
-</div>  
  
 
 <!-- Start of first page: #one -->

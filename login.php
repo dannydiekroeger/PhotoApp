@@ -18,6 +18,34 @@
 
 </head>  
 <body> 
+<div id="fb-root"></div>
+<div data-role="page" id="login">
+
+	<div data-role="header">
+		<h1>Facebook Login</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+
+	<div class="container">
+		<div class="loginform_cont">
+			<form id="login_form" enctype="multipart/form-data" method="post" action="#one">
+				<input type="button" value="login" onclick="loginUser()" />
+			</form>
+		</div>
+	</div>	
+
+
+		<p><a href="index.php" data-role="button">Skip this page</a></p>			
+<!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
+	</div><!-- /content --> 
+	
+	</div>
+
+
+</div>  
+
+
 
 <div data-role="page">
 
@@ -61,8 +89,81 @@
 		$("#logout").hide();
 		$("#info").hide();
 	});
-	</script>
+
+function uploadButton() {
+	$('#image_file').trigger('click');
+	startUploading();
+}
+
+function loginUser() {    
+   FB.login(function(response) { }, {scope:'email'});  	
+ }
+ 
+function handleStatusChange(response) {
+     document.body.className = response.authResponse ? 'connected' : 'not_connected';
+    
+     if (response.authResponse) {
+       console.log(response);
+       updateUserInfo(response);
+     }
+}
+
+    window.fbAsyncInit = function() {
+      FB.init({ appId: '296344457137837', 
+      status: true, 
+      cookie: true,
+      xfbml: true,
+      oauth: true});
+ 
+      FB.Event.subscribe('auth.statusChange', handleStatusChange);	
+    };
+
+    function updateUserInfo(response) {
+      FB.api('/me', function(response) {
+        document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+      });
+    }
+
+    (function() {
+      var e = document.createElement('script'); e.async = true;
+          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+          document.getElementById('fb-root').appendChild(e);
+          }());
+// This handles all the swiping between each page. You really
+// needn't understand it all.
+/*
+
+
+
+$(document).on('pageshow', 'div:jqmData(role="page")', function(){
+
+     var page = $(this), nextpage, prevpage;
+     // check if the page being shown already has a binding
+      if ( page.jqmData('bound') != true ){
+            // if not, set blocker
+            page.jqmData('bound', true)
+            // bind
+                .on('swipeleft.paginate', function() {
+                    console.log("binding to swipe-left on "+page.attr('id'));
+                    nextpage = page.next('div[data-role="page"]');
+                    if (nextpage.length > 0) {
+                       $.mobile.changePage(nextpage,{transition: "slide"}, false, true);
+                        }
+                    })
+                .on('swiperight.paginate', function(){
+                    console.log("binding to swipe-right "+page.attr('id'));
+                    prevpage = page.prev('div[data-role="page"]');
+                    if (prevpage.length > 0) {
+                        $.mobile.changePage(prevpage, {transition: "slide",
+	reverse: true}, true, true);
+                        };
+                     });
+            }
+        });
+*/
+</script>
 </div><!-- /page -->
+
 
 </body>
 </html>
