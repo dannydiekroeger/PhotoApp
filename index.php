@@ -19,8 +19,6 @@
 	<script src="jquery.mobile-1.2.0.js"></script>
 
 </head> 
-
-	
 <body>
 <!--
 <div id="fb-root"></div>
@@ -93,6 +91,50 @@
 </div>
 </div><!-- /page two -->
 
+
+
+<!-- Start of Album Gallery page-->
+<div data-role="page" id="Albumgallery" data-add-back-btn="true">
+
+	<div data-role="header">
+		<h1>Album Gallery</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<h2>Album Gallery</h2>
+		<div class="ui-grid-b">
+			<div class="ui-block-a"> <img width="80" height="140" src="images/obama.jpeg"> </div>
+			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-a"> <img src="images/romney.png"> </div>
+			<div class="ui-block-b"> <img src="images/romney.png"> </div>
+			<div class="ui-block-c"> <img src="images/romney.png"> </div>
+			<div class="ui-block-a"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
+		</div>
+		
+	</div><!-- /content -->
+
+</div><!-- end Album Gallery-->
+
+
+<!-- confirm event leaving popup-->
+<div data-role="page" id="confirmAlbumLeave">
+
+	<div data-role="header">
+		<h1>confirmation</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<h2>Are you sure you want to stop contributing to this album?</h2>
+		<a href="#one" data-role="button" data-theme="d" data-pos="right">Yes, stop contributing</a>
+		<a href="#invitations" data-role="button" data-theme="d" data-pos="right" data-rel="back">Let me reconsider</a>		
+	</div><!-- /content -->
+
+</div><!-- end event leaving confirm popup-->
+
+
 <!-- Settings page-->
 <div data-role="page" id="settings" data-add-back-btn="true">
 
@@ -120,7 +162,7 @@
 	<div data-role="content">	
 		<p>Jamin has invited you to</p>	
 		<h2>Danny's Birthday Dinner</h2>
-		<a href="#Album" data-role="button" data-theme="b" data-icon="check" data-pos="right">Join Album</a>
+		<a href="enter.php/#Album" data-role="button" data-theme="b" data-icon="check" data-pos="right">Join Album</a>
 		<a href="#confirmEventDecline" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Decline Invite</a>		
 	</div><!-- /content -->
 </div>
@@ -141,108 +183,6 @@
 </div>
 </div><!-- end event decline confirm popup-->
 
-<!-- confirm event leaving popup-->
-<div data-role="page" id="confirmAlbumbLeave">
-
-	<div data-role="header">
-		<h1>confirmation</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">	
-		<h2>Are you sure you want to stop contributing to this album?</h2>
-		<a href="#one" data-role="button" data-theme="d" data-pos="right">Yes, stop contributing</a>
-		<a href="#invitations" data-role="button" data-theme="d" data-pos="right" data-rel="back">Let me reconsider</a>		
-	</div><!-- /content -->
-</div>
-</div><!-- end event leaving confirm popup-->
-
-<!-- Album page-->
-<div data-role="page" id="Album">
-
-	<div data-role="header">
-		<h1>Album Name</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">			
-	<!--Camera access -->	
-		<div class="container">
-            
-            <div class="upload_form_cont">
-                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
-                    <div>
-                        <div><h2 for="image_file">Take or Upload a Photo!</h2>
-
-                        </div>
-                        
-                        </br>
-                        <input type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
-                        <!-- make it upload right away, not "fileSelected()" 
-                        onchange="startUploading();"-->
-                        <div><input type="file" name="image_file" id="image_file" onchange="#Albumgallery" style="display:none"/></div>
-                    </div>
-                    <!--
-                    <div>
-                    </br>
-                    <input type="button" value="Add Photo to Album" onclick="startUploading()" />
-                    </div>
-                    -->
-                    </br></br>
-<a href="#Albumgallery" data-role="button" data-theme="d">Album Gallery</a>	
-           	<p><a href="#confirmAlbumbLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>	
-                    <div id="fileinfo">
-                        <div id="filename"></div>
-                        <div id="filesize"></div>
-                        <div id="filetype"></div>
-                        <div id="filedim"></div>
-                    </div>
-                    <div id="progress_info">
-                        <div id="progress"></div>
-                        <div id="progress_percent">&nbsp;</div>
-                        <div class="clear_both"></div>
-                        <div>
-                            <div id="speed">&nbsp;</div>
-                            <div id="remaining">&nbsp;</div>
-                            <div id="b_transfered">&nbsp;</div>
-                            <div class="clear_both"></div>
-                        </div>
-                        <div id="upload_response"></div>
-                    </div>
-                </form>
-                <img id="preview" />
-            </div>
-        </div>	
-		<!-- end camera access-->	
-		
-	</div><!-- /content -->
-</div>
-</div><!-- end Album page-->
-
-
-<!-- Start of Album Gallery page-->
-<div data-role="page" id="Albumgallery" data-add-back-btn="true">
-
-	<div data-role="header">
-		<h1>Album Gallery</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">	
-		<h2>Album Gallery</h2>
-		<div class="ui-grid-b">
-			<div class="ui-block-a"> <img width="80" height="140" src="images/obama.jpeg"> </div>
-			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-a"> <img src="images/romney.png"> </div>
-			<div class="ui-block-b"> <img src="images/romney.png"> </div>
-			<div class="ui-block-c"> <img src="images/romney.png"> </div>
-			<div class="ui-block-a"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
-		</div>
-		
-	</div><!-- /content -->
-
-</div>
-</div><!-- end Album Gallery-->
 
 
 <!-- Start of third page: #popup -->
@@ -255,14 +195,14 @@
 	<div data-role="content" data-theme="d">	
 		<h2>Create an Album</h2>
 		<!--Will need to change action to process data!! with method = post-->
-		<form action="#Album">
-			<label for="foo">Album Name:</label>
-			<input type="text" name="username" id="foo">
-			<label for="bar">Add Friend:</label>
-			<input type="text" name="friend" id="bar">
-	        <!--<input type="submit" data-theme="b" value="Create Album"> -->
+		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="enter.php">
+			<label for="album">Album Name:</label>
+			<input type="text" name="album" id="album">
+			<label for="friend">Add Friend:</label>
+			<input type="text" name="friend" id="friend">
+	        <input type="submit" data-theme="b" value="Create Album">
 			</form>	
-		<a href="#Album" data-role="button" data-theme="b">Create Album</a>	
+		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
 		<p><a href="#one" data-role="button" data-icon="minus">Cancel</a></p>	
 	</div><!-- /content -->
 
@@ -270,24 +210,9 @@
 </div><!-- /page popup -->
 
 <!-- Facebook scripts here -->
-  <div id="user-info"></div>
-
-  </script>
-  
-  <script>
-
-  </script>
-  
-  <script>
-
-   </script>
-   
-   <script>
-
-  </script>
-<!-- End of Facebook scripts -->
 
 <script type="text/javascript">
+
 
 function uploadButton() {
 	$('#image_file').trigger('click');
@@ -308,7 +233,7 @@ function handleStatusChange(response) {
 }
 
     window.fbAsyncInit = function() {
-      FB.init({ appId: '296344457137837', 
+      FB.init({ appId: '448021921920652', 
       status: true, 
       cookie: true,
       xfbml: true,

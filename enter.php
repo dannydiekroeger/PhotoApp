@@ -19,54 +19,89 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<!-- Album page-->
+<div data-role="page" id="Album">
 
-	<div data-role="header">
-		<h1>My Title</h1>
-		<a href="#" data-icon="check" id="logout" class="ui-btn-right">Logout</a>
+	
+	<!-- Header in PHP -->
+	<?php echo "<div data-role='header'><h1>".$_POST["album"]."</h1></div>"; ?>
+	<div data-role="content">
 
-	</div><!-- /header -->
-
-	<div data-role="content">	
-		
-		<?php
-		// This is a hack. You should connect to a database here.
-		if ($_POST["username"] == "oi") {
-			?>
-			<script type="text/javascript">
+		<script type="text/javascript">
 				// Save the username in local storage. That way you
 				// can access it later even if the user closes the app.
-				localStorage.setItem('username', '<?=$_POST["username"]?>');
-			</script>
-			<?php
-			echo "<p>Thank you, <strong>".$_POST["username"]."</strong>. You are now logged in.</p>";
-		} else {
-			echo "<p>There seems to have been an error.</p>";
-		}
-			
+				localStorage.setItem('album', '<?=$_POST["album"]?>');
+		</script>
+		
+		<?php
+		if ($_POST["album"] == "album") {
+		} 
+		?>	
+				
+				
+	<!--Camera access -->	
+		<div class="container">
+            
+            <div class="upload_form_cont">
+                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
+                    <div>
+                        <div><h2 for="image_file">Take or Upload a Photo!</h2>
 
-		?>
+                        </div>
+                        
+                        </br>
+                        <input type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
+                        <!-- make it upload right away, not "fileSelected()" 
+                        onchange="startUploading();"-->
+                        <div><input type="file" name="image_file" id="image_file" onchange="enter.php/#Albumgallery" style="display:none"/></div>
+                    </div>
+                    <!--
+                    <div>
+                    </br>
+                    <input type="button" value="Add Photo to Album" onclick="startUploading()" />
+                    </div>
+                    -->
+                    </br></br>
+<a href="#Albumgallery" data-role="button" data-theme="d">Album Gallery</a>	
+           	<p><a href="#confirmAlbumLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>	
+                    <div id="fileinfo">
+                        <div id="filename"></div>
+                        <div id="filesize"></div>
+                        <div id="filetype"></div>
+                        <div id="filedim"></div>
+                    </div>
+                    <div id="progress_info">
+                        <div id="progress"></div>
+                        <div id="progress_percent">&nbsp;</div>
+                        <div class="clear_both"></div>
+                        <div>
+                            <div id="speed">&nbsp;</div>
+                            <div id="remaining">&nbsp;</div>
+                            <div id="b_transfered">&nbsp;</div>
+                            <div class="clear_both"></div>
+                        </div>
+                        <div id="upload_response"></div>
+                    </div>
+                </form>
+                <img id="preview" />
+            </div>
+        </div>	
+		<!-- end camera access-->	
+		
 	</div><!-- /content -->
-
-	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="nav-glyphish-example" data-grid="c">
-		<ul>
-			<li><a href="index.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="login.php" id="key" data-icon="custom" class="ui-btn-active">Login</a></li>
-			<li><a href="filter.php" id="beer" data-icon="custom">Filter</a></li>
-			<li><a href="#" id="skull" data-icon="custom">Settings</a></li>
-		</ul>
-		</div>
-	</div>
-	
-	<script type="text/javascript">
+		<script type="text/javascript">
 		$("#logout").click(function() {
 			localStorage.removeItem('username');
 			$("#form").show();
 			$("#logout").hide();
 		});
 	</script>
-</div><!-- /page -->
+</div><!-- end Album page-->
+
+<script type="text/javascript">
+
+
+</script>
 
 </body>
 </html>
