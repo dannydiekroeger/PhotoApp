@@ -21,7 +21,50 @@
 </head> 
 
 	
-<body> 
+<body>
+<div id="fb-root"></div>
+		<div id="login">
+     		<p><button onClick="loginUser();">Login</button></p>
+  		</div>
+   		<div id="logout">
+     	<div id="user-info"></div>
+     		<p><button  onClick="FB.logout();">Logout</button></p>
+   		</div>
+
+<!-- This style is for Facebook login/logout stuff -->
+<style>
+    body.connected #login { display: none; }
+    body.connected #logout { display: block; }
+    body.not_connected #login { display: block; }
+    body.not_connected #logout { display: none; }
+</style>
+ 
+<div data-role="page" id="login">
+
+	<div data-role="header">
+		<h1>Facebook Login</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+
+	<div class="container">
+		<div class="loginform_cont">
+			<form id="login_form" enctype="multipart/form-data" method="post" action="#one">
+				<input type="button" value="login" onclick="loginUser()" />
+			</form>
+		</div>
+	</div>	
+
+
+		<p><a href="#invitations" data-role="button">Album Invitations</a></p>			
+<!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
+	</div><!-- /content --> 
+	
+	</div>
+
+
+</div>  
+ 
 
 <!-- Start of first page: #one -->
 <div data-role="page" id="one">
@@ -31,6 +74,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">	
+
 
 		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Album</a></p>
 		<br/><br/><br/><br/>
@@ -151,11 +195,7 @@
                 <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
                     <div>
                         <div><h2 for="image_file">Take or Upload a Photo!</h2>
-                        
-                        <!--
-                        <h5> Press "Choose File" to take/upload a photo
-                         and then press "Add Photo to Album"</h5>
-                         -->
+
                         </div>
                         
                         </br>
@@ -212,7 +252,7 @@
 	<div data-role="content">	
 		<h2>Album Gallery</h2>
 		<div class="ui-grid-b">
-			<div class="ui-block-a"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-a"> <img width="80" height="140" src="images/obama.jpeg"> </div>
 			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
 			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
 			<div class="ui-block-a"> <img src="images/romney.png"> </div>
@@ -253,6 +293,24 @@
 </div>
 </div><!-- /page popup -->
 
+<!-- Facebook scripts here -->
+  <div id="user-info"></div>
+
+  </script>
+  
+  <script>
+
+  </script>
+  
+  <script>
+
+   </script>
+   
+   <script>
+
+  </script>
+<!-- End of Facebook scripts -->
+
 <script type="text/javascript">
 
 function uploadButton() {
@@ -260,6 +318,40 @@ function uploadButton() {
 	startUploading();
 }
 
+function loginUser() {    
+   FB.login(function(response) { }, {scope:'email'});  	
+ }
+ 
+function handleStatusChange(response) {
+     document.body.className = response.authResponse ? 'connected' : 'not_connected';
+    
+     if (response.authResponse) {
+       console.log(response);
+       updateUserInfo(response);
+     }
+}
+
+    window.fbAsyncInit = function() {
+      FB.init({ appId: '296344457137837', 
+      status: true, 
+      cookie: true,
+      xfbml: true,
+      oauth: true});
+ 
+      FB.Event.subscribe('auth.statusChange', handleStatusChange);	
+    };
+
+    function updateUserInfo(response) {
+      FB.api('/me', function(response) {
+        document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+      });
+    }
+
+    (function() {
+      var e = document.createElement('script'); e.async = true;
+          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+          document.getElementById('fb-root').appendChild(e);
+          }());
 // This handles all the swiping between each page. You really
 // needn't understand it all.
 /*
