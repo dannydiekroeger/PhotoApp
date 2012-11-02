@@ -53,7 +53,7 @@
 		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Album</a></p>
 		<br/><br/><br/><br/>
 		<p><a href="#myAlbums" data-role="button">My Albums</a></p>
-		<p><a href="#settings" data-role="button">Settings</a></p>
+		<!--<p><a href="#settings" data-role="button">Settings</a></p>-->
 		<p><a href="#invitations" data-role="button">Album Invitations</a></p>			
 <!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
 	</div><!-- /content --> 
@@ -126,13 +126,19 @@
 <!-- Start of Album Gallery page-->
 <div data-role="page" id="Albumgallery" data-add-back-btn="true">
 
-	<div data-role="header">
-		<h1>Album Gallery</h1>
+
+
+		
+	<div data-role="header" id="galleryHeader">
+		<script type="text/javascript">
+			document.getElementById("galleryHeader").innerHTML = "<h1>" + localStorage.getItem('album') + "</h1>";
+		</script>
+	
+	
 		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
 	</div><!-- /header -->
 
 	<div data-role="content">	
-		<h2>Album Gallery</h2>
 		<div class="ui-grid-b">
 			<div class="ui-block-a"> <img width="91" height="131" src="images/obama.jpeg"> </div>
 			<div class="ui-block-b"> <img width="91" height="131" src="images/obama.jpeg"> </div>
