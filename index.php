@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no"> 
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 
@@ -42,9 +42,9 @@
 
 <!-- Start of first page: #one -->
 <div data-role="page" id="one">
-
 	<div data-role="header">
 		<h1>Trail Mix</h1>
+<a href="#Help" data-role="button" class="ui-btn-right" data-rel="dialog">?</a>	
 	</div><!-- /header -->
 
 	<div data-role="content">	
@@ -107,27 +107,42 @@
 </div><!-- /page two -->
 
 
+<!-- Start of Help page-->
+<div data-role="page" id="Help" data-rel="dialog" >
+
+	<div data-role="header">
+		<h1>Help</h1>
+		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<h4>Welcome to Trail Mix.  Trail Mix allows you to instantly and automatically share photos with groups of friends.  Simply create an album, invite you friends to join the album, and take or upload a photo to the album.  Login with Facebook to get started! </h4>
+	</div><!-- /content -->
+	
+
+</div><!-- end Help-->
+
 
 <!-- Start of Album Gallery page-->
 <div data-role="page" id="Albumgallery" data-add-back-btn="true">
 
 	<div data-role="header">
 		<h1>Album Gallery</h1>
-		<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>
+		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
 	</div><!-- /header -->
 
 	<div data-role="content">	
 		<h2>Album Gallery</h2>
 		<div class="ui-grid-b">
-			<div class="ui-block-a"> <img width="80" height="140" src="images/obama.jpeg"> </div>
-			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-a"> <img src="images/romney.png"> </div>
-			<div class="ui-block-b"> <img src="images/romney.png"> </div>
-			<div class="ui-block-c"> <img src="images/romney.png"> </div>
-			<div class="ui-block-a"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-b"> <img src="images/obama.jpeg"> </div>
-			<div class="ui-block-c"> <img src="images/obama.jpeg"> </div>
+			<div class="ui-block-a"> <img width="91" height="131" src="images/obama.jpeg"> </div>
+			<div class="ui-block-b"> <img width="91" height="131" src="images/obama.jpeg"> </div>
+			<div class="ui-block-c"> <img width="91" height="131" src="images/obama.jpeg"> </div>
+			<div class="ui-block-a"> <img width="91" height="131" src="images/romney.png"> </div>
+			<div class="ui-block-b"> <img width="91" height="131" src="images/romney.png"> </div>
+			<div class="ui-block-c"> <img width="91" height="131" src="images/romney.png"> </div>
+			<div class="ui-block-a"> <img width="91" height="131" src="images/obama.jpeg"> </div>
+			<div class="ui-block-b"> <img width="91" height="131" src="images/obama.jpeg"> </div>
+			<div class="ui-block-c"> <img width="91" height="131" src="images/obama.jpeg"> </div>
 		</div>
 		
 	</div><!-- /content -->
