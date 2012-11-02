@@ -72,6 +72,19 @@
 	<div data-role="content">	
 		<p>Here will be a list of all your Albums</p>
 		<ul data-role="listview"  data-inset="true">
+		
+		<?php
+		include("config.php");
+		$query = "select * from Albums";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["Album Name"]."with ".$row["Friends"]."</p>";	
+		}
+		?>
+		</ul>
+		
+		<!--
+		<ul data-role="listview"  data-inset="true">
 			<li>
 			<a href="#Albumgallery"><img src="images/WaterColor.Sunset.JPG" alt="Pic" class="ui-li-thumbnail">Florida Vacation</a>
 			</li>
@@ -84,7 +97,9 @@
 			<li>
 			<a href="#Albumgallery"><img src="images/romney.png" alt="romneypic" class="ui-li-thumbnail">Lunch with Mitt</a>
 			</li>
+		
 		</ul>
+		-->
 
 	</div><!-- /content -->
 
@@ -98,6 +113,7 @@
 
 	<div data-role="header">
 		<h1>Album Gallery</h1>
+		<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>
 	</div><!-- /header -->
 
 	<div data-role="content">	
