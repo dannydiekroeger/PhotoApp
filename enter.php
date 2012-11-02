@@ -30,7 +30,7 @@
 		<script type="text/javascript">
 				// Save the username in local storage. That way you
 				// can access it later even if the user closes the app.
-				localStorage.setItem('album', '.$_POST["album"].');
+				//localStorage.setItem('album', '.$_POST["album"].');
 		</script>
 		
 		<?php

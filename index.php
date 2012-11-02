@@ -131,9 +131,9 @@
 		
 	<div data-role="header" id="galleryHeader">
 		<script type="text/javascript">
-			document.getElementById("galleryHeader").innerHTML = "<h1>" + localStorage.getItem('album') + "</h1>";
+			//document.getElementById("galleryHeader").innerHTML = "<h1>" + localStorage.getItem('album') + "</h1>";
 		</script>
-	
+		<h1>Album Gallery</h1>
 	
 		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
 	</div><!-- /header -->
