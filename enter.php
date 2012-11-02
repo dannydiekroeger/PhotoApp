@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>VoteCaster | Submit</title> 
+	<title>Trail Mix</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -34,6 +34,13 @@
 		</script>
 		
 		<?php
+		include("config.php");
+		
+		$query = $query = "INSERT INTO Albums VALUES 
+		('".$_POST["album"]."', '".$_POST["friend"]."', 
+		 'NULL', 'NULL')";
+		$result = mysql_query($query);
+		
 		if ($_POST["album"] == "album") {
 		} 
 		?>	
