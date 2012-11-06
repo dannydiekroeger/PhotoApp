@@ -35,8 +35,6 @@
 		</div>
 	</div>	
 
-
-		<p><a href="index.php" data-role="button">Skip this page</a></p>			
 <!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
 	</div><!-- /content --> 
 	
@@ -95,8 +93,15 @@ function uploadButton() {
 	startUploading();
 }
 
-function loginUser() {    
-   FB.login(function(response) { }, {scope:'email'});  	
+function loginUser() {
+   FB.login(function(response) {
+   	if (response.authResponse) {
+   		window.location ="http://stanford.edu/~connorb/cgi-bin/PhotoApp/index.php";}
+   		else {
+   			alert ("Your login attempt failed. Please double check your username and password and try again")
+   		}
+   			
+   	 }, {scope:'email'});  	
  }
  
 function handleStatusChange(response) {
@@ -109,7 +114,7 @@ function handleStatusChange(response) {
 }
 
     window.fbAsyncInit = function() {
-      FB.init({ appId: '296344457137837', 
+      FB.init({ appId: '448021921920652', 
       status: true, 
       cookie: true,
       xfbml: true,
