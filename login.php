@@ -26,7 +26,8 @@
 	</div><!-- /header -->
 
 	<div data-role="content">	
-
+	<h1> Welcome to Trail Mix <h1>
+	<p><img src="images/trailmixicon.jpg" width="328" height="318"></p>
 	<div class="container">
 		<div class="loginform_cont">
 			<form id="login_form" enctype="multipart/form-data" method="post" action="#one">
@@ -96,7 +97,7 @@ function uploadButton() {
 function loginUser() {
    FB.login(function(response) {
    	if (response.authResponse) {
-   		window.location ="http://stanford.edu/~connorb/cgi-bin/PhotoApp/index.php";}
+   		window.location ="index.php";}
    		else {
    			alert ("Your login attempt failed. Please double check your username and password and try again")
    		}
