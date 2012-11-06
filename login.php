@@ -6,12 +6,13 @@
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no"> 
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
+
 	<link rel="stylesheet" href="style.css" />
-	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="startup.png">
+	<link rel="apple-touch-icon" href="images/trailmixicon.jpg" />
+	<link rel="apple-touch-startup-image" href="images/background.png"/>
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
@@ -26,8 +27,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">	
-	<h1> Welcome to Trail Mix <h1>
-	<p><img src="images/trailmixicon.jpg" width="328" height="318"></p>
+	<p><img src="images/mix.png" width="285" height="255"></p>
 	<div class="container">
 		<div class="loginform_cont">
 			<form id="login_form" enctype="multipart/form-data" method="post" action="#one">
