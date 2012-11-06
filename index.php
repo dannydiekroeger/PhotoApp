@@ -133,27 +133,15 @@
 		<script type="text/javascript">
 			//document.getElementById("galleryHeader").innerHTML = "<h1>" + localStorage.getItem('album') + "</h1>";
 		</script>
-		<h1>Album Gallery</h1>
+	<h1>Album Gallery</h1>
 	
 		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
 	</div><!-- /header -->
-
-	<div data-role="content">	
-		<div class="ui-grid-b">
-			<div class="ui-block-a"> <img width="91" height="131" src="images/obama.jpeg"> </div>
-			<div class="ui-block-b"> <img width="91" height="131" src="images/obama.jpeg"> </div>
-			<div class="ui-block-c"> <img width="91" height="131" src="images/obama.jpeg"> </div>
-			<div class="ui-block-a"> <img width="91" height="131" src="images/romney.png"> </div>
-			<div class="ui-block-b"> <img width="91" height="131" src="images/romney.png"> </div>
-			<div class="ui-block-c"> <img width="91" height="131" src="images/romney.png"> </div>
-			<div class="ui-block-a"> <img width="91" height="131" src="images/obama.jpeg"> </div>
-			<div class="ui-block-b"> <img width="91" height="131" src="images/obama.jpeg"> </div>
-			<div class="ui-block-c"> <img width="91" height="131" src="images/obama.jpeg"> </div>
-		</div>
-		
+	<p> Gallery will go here </p>
 	</div><!-- /content -->
 
 </div><!-- end Album Gallery-->
+
 
 
 <!-- confirm event leaving popup-->
