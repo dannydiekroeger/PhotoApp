@@ -52,7 +52,7 @@
 
 		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Album</a></p>
 		<br/><br/><br/><br/>
-		<p><a href="#myAlbums" data-role="button">My Albums</a></p>
+		<p><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/3.0.5/examples/myalbums.php" data-role="button" rel="external">My Albums</a></p>
 		<!--<p><a href="#settings" data-role="button">Settings</a></p>-->
 		<p><a href="#invitations" data-role="button">Album Invitations</a></p>			
 <!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
@@ -68,7 +68,9 @@
 	<div data-role="header">
 		<h1>My Albums</h1>
 	</div><!-- /header -->
+	
 
+<!-- THIS IS THE DATABASE CODE, COMMENTED OUT SO I CAN TEST ALBUM AESTHETICS
 	<div data-role="content">	
 		<p>Here will be a list of all your Albums</p>
 		<ul data-role="listview"  data-inset="true">
@@ -82,7 +84,7 @@
 		}
 		?>
 		</ul>
-		
+		END OF DATABASE CODE COMMENTED OUT-->
 		<!--
 		<ul data-role="listview"  data-inset="true">
 			<li>

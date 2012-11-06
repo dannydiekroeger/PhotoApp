@@ -72,6 +72,11 @@
 	
 	
 	<div data-role="content" >	
+			
+		<ul data-role="listview" data-inset="true">
+			<li><a href="#Gallery1">Danny's Rager</a></li> 
+			<li><a href="#Gallery2">Church with Jamin</a></li> 
+		</ul> 
 		<p>Here will be a list of all your Albums</p>
 		<ul data-role="listview"  data-inset="true">
 		
@@ -84,12 +89,6 @@
 		}
 		?>
 		</ul>
-			
-		
-		<ul data-role="listview" data-inset="true">
-			<li><a href="#Gallery1">Danny's Rager</a></li> 
-			<li><a href="#Gallery2">Church with Jamin</a></li> 
-		</ul> 
 		
 	</div>
 
