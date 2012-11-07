@@ -36,7 +36,7 @@
 		<?php
 		include("config.php");
 		
-		$query = $query = "INSERT INTO Albums VALUES 
+		$query = "INSERT INTO Albums VALUES 
 		('".$_POST["album"]."', '".$_POST["friend"]."', 
 		 'NULL', 'NULL')";
 		$result = mysql_query($query);

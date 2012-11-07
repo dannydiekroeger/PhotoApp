@@ -229,12 +229,56 @@
 			<input type="text" name="friend" id="friend">
 	        <input type="submit" data-theme="b" value="Create Album">
 			</form>	
+			<p><a href="#friendListTest" data-role="button" data-icon="plus">Friends List Test</a></p>	
 		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
 		<p><a href="#one" data-role="button" data-icon="minus">Cancel</a></p>	
 	</div><!-- /content -->
 
 </div>
 </div><!-- /page popup -->
+
+
+<!--Friends List Test start -->
+<div data-role="page" id="friendListTest" data-add-back-btn="true">
+
+	<div data-role="header"">
+		<h1>Select Friends</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="d">
+	
+	<form id="addFriendForm" enctype="multipart/form-data" method="post" action="enter.php"> <!--Create action=add friends to database -->
+		
+<div data-role="fieldcontain">
+ 	<fieldset data-role="controlgroup">
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+		<label for="checkbox-1">Danny</label>
+    </fieldset>
+     	<fieldset data-role="controlgroup">
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+		<label for="checkbox-1">Jamin</label>
+    </fieldset>
+     	<fieldset data-role="controlgroup">
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+		<label for="checkbox-1">Connor</label>
+    </fieldset>
+     	<fieldset data-role="controlgroup">
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+		<label for="checkbox-1">Arvind</label>
+    </fieldset>
+</div>
+ <input type="submit" data-theme="b" value="Done">
+</form>
+
+	</div><!-- /content -->
+
+</div>
+</div><!-- /page popup -->
+
+
+
+
+<!--Friends List Test end-->
 
 <!-- Facebook scripts here -->
 

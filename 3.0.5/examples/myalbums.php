@@ -74,8 +74,28 @@
 	<div data-role="content" >	
 			
 		<ul data-role="listview" data-inset="true">
-			<li><a href="#Gallery1">Danny's Rager</a></li> 
-			<li><a href="#Gallery2">Church with Jamin</a></li> 
+			<li><a href="#Gallery1">
+					<?php
+		include("config.php");
+		$query = "select distinct AlbumName from Albums where Friends = 'Jamin'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+			</a></li> 
+			<li><a href="#Gallery2">
+			
+				<?php
+		include("config.php");
+		$query = "select AlbumName from Albums where Friends = 'Danny'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+
+			</a></li> 
 		</ul> 
 		<p>Here will be a list of all your Albums</p>
 		<ul data-role="listview"  data-inset="true">
@@ -85,9 +105,11 @@
 		$query = "select * from Albums";
 		$result = mysql_query($query);
 		while($row = mysql_fetch_assoc($result)) {
-			echo "<p>".$row["Album Name"]."with ".$row["Friends"]."</p>";	
+			echo "<p>".$row["AlbumName"]." with ".$row["Friends"]."</p>";	
 		}
 		?>
+		
+		
 		</ul>
 		
 	</div>
@@ -99,7 +121,16 @@
 <div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
 
 	<div data-role="header">
-		<h1>Danny's Rager</h1>
+		<h1>
+							<?php
+		include("config.php");
+		$query = "select AlbumName from Albums where Friends = 'Jamin'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+		</h1>
 	</div>
 
 	<div data-role="content">	
@@ -125,7 +156,16 @@
 <div data-role="page" data-add-back-btn="true" id="Gallery2" class="gallery-page">
 
 	<div data-role="header">
-		<h1>Church With Jamin</h1>
+		<h1>
+			<?php
+		include("config.php");
+		$query = "select AlbumName from Albums where Friends = 'Danny'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+		</h1>
 	</div>
 
 	<div data-role="content">	

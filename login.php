@@ -31,7 +31,7 @@
 	<div class="container">
 		<div class="loginform_cont">
 			<form id="login_form" enctype="multipart/form-data" method="post" action="#one">
-				<input type="button" value="login" onclick="loginUser()" />
+				<input type="button" value="log in or continue (if logged in)" onclick="loginUser()" />
 			</form>
 		</div>
 	</div>	
@@ -45,7 +45,7 @@
 </div>  
 
 
-
+<!--
 <div data-role="page">
 
 	<div data-role="header">
@@ -53,7 +53,7 @@
 	<a href="#" data-icon="check" id="logout" class="ui-btn-right">Logout</a>
 
 	</div><!-- /header -->
-
+<!--
 	<div data-role="content">
 	
 	<p>The form should go here</p>
@@ -99,7 +99,7 @@ function loginUser() {
    	if (response.authResponse) {
    		window.location ="index.php";}
    		else {
-   			alert ("Your login attempt failed. Please double check your username and password and try again")
+   			alert ("Your login attempt failed. Please double check your username and password and try again.")
    		}
    			
    	 }, {scope:'email'});  	
