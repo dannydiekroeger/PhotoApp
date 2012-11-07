@@ -97,6 +97,7 @@ function uploadButton() {
 function loginUser() {
    FB.login(function(response) {
    	if (response.authResponse) {
+   		//alert(response.authResponse.accessToken);
    		window.location ="index.php";}
    		else {
    			alert ("Your login attempt failed. Please double check your username and password and try again.")

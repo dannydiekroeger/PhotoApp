@@ -20,6 +20,37 @@
 
 </head> 
 <body>
+
+
+
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '448021921920652', // App ID from the App Dashboard
+      //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File for x-domain communication
+      status     : true, // check the login status upon init?
+      cookie     : true, // set sessions cookies to allow your server to access the session?
+      xfbml      : true  // parse XFBML tags on this page?
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+
+  };
+
+  // Load the SDK's source Asynchronously
+  (function(d, debug){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document, /*debug*/ false));
+</script>
+
+
+
 <!--
 <div id="fb-root"></div>
 		<div id="login">
@@ -46,6 +77,10 @@
 		<h1>Trail Mix</h1>
 <a href="#Help" data-role="button" class="ui-btn-right" data-rel="dialog">?</a>	
 	</div><!-- /header -->
+
+<script>
+	alert(response.authResponse.accessToken);
+	</script>
 
 	<div data-role="content">	
 
@@ -134,6 +169,7 @@
 	<div data-role="header" id="galleryHeader">
 		<script type="text/javascript">
 			//document.getElementById("galleryHeader").innerHTML = "<h1>" + localStorage.getItem('album') + "</h1>";
+			
 		</script>
 	<h1>Album Gallery</h1>
 	
@@ -165,6 +201,8 @@
 <!-- Settings page-->
 <div data-role="page" id="settings" data-add-back-btn="true">
 
+	
+
 	<div data-role="header">
 		<h1>Settings</h1>
 	</div><!-- /header -->
@@ -185,6 +223,8 @@
 	<div data-role="header">
 		<h1>Album Invation</h1>
 	</div><!-- /header -->
+
+
 
 	<div data-role="content">	
 		<p>Jamin has invited you to</p>	
@@ -246,8 +286,43 @@
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">
+	<p id="friend"></p>
+	<script>
+	function fbEnsureInit(callback) {
+        if(!window.fbApiInit) {
+            setTimeout(function() {fbEnsureInit(callback);}, 50);
+        } else {
+            if(callback) {
+                callback();
+            }
+        }
+    }
+    
+    fbEnsureInit(function() {
+    
+    var apiQuery = 
+{
+   method: 'fql.query',
+   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE uid2 = me() ) AND is_app_user'
+}  
+
+FB.api(apiQuery, function(response) { 
+	$("#friend").html(response[0].name);
 	
-	<form id="addFriendForm" enctype="multipart/form-data" method="post" action="enter.php"> <!--Create action=add friends to database -->
+	 });
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</script>
+
 		
 <div data-role="fieldcontain">
  	<fieldset data-role="controlgroup">
@@ -268,7 +343,7 @@
     </fieldset>
 </div>
  <input type="submit" data-theme="b" value="Done">
-</form>
+
 
 	</div><!-- /content -->
 
