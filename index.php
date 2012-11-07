@@ -287,6 +287,8 @@
 
 	<div data-role="content" data-theme="d">
 	<p id="friend"></p>
+	
+	
 	<script>
 	function fbEnsureInit(callback) {
         if(!window.fbApiInit) {
@@ -303,7 +305,7 @@
     var apiQuery = 
 {
    method: 'fql.query',
-   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE uid2 = me() ) AND is_app_user'
+   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE uid2 = me() ) AND is_app_user order by concat(first_name,last_name) asc'
 }  
 
 FB.api(apiQuery, function(response) { 
@@ -311,16 +313,6 @@ FB.api(apiQuery, function(response) {
 	
 	 });
 	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	</script>
 
 		
