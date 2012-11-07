@@ -286,11 +286,30 @@
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">
-	<p id="friend"></p>
+	<p class="friend"></p>
+	
 	
 	
 	<script>
+	var apiQuery = 
+	{
+   method: 'fql.query',
+   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE 	uid2 = me() ) AND is_app_user'
+	}  
+
+FB.api(apiQuery, function(response) { 
+	$(".friend").html(response[0].name);
+	alert(response);
+	 });
+	});
+	</script>
+	
+	<!--
+	<script>
 	function fbEnsureInit(callback) {
+  
+	
+	
         if(!window.fbApiInit) {
             setTimeout(function() {fbEnsureInit(callback);}, 50);
         } else {
@@ -301,7 +320,7 @@
     }
     
     fbEnsureInit(function() {
-    
+    alert("khjl");
     var apiQuery = 
 {
    method: 'fql.query',
@@ -309,11 +328,12 @@
 }  
 
 FB.api(apiQuery, function(response) { 
-	$("#friend").html(response[0].name);
-	
+	$(".friend").html(response[0].name);
+	alert(response);
 	 });
 	});
 	</script>
+	-->
 
 		
 <div data-role="fieldcontain">
