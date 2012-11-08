@@ -11,13 +11,20 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 
+	<link href="3.0.5/photoswipe.css" type="text/css" rel="stylesheet" />
+
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="images/trailmixicon.jpg" />
 	<link rel="apple-touch-startup-image" href="images/background.png"/>
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script type="text/javascript" src="3.0.5/lib/klass.min.js"></script>
+	<script type="text/javascript" src="3.0.5/code.photoswipe.jquery-3.0.5.min.js"></script>
+	<link href="3.0.5/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
+	
 
+	
 </head> 
 <body>
 
@@ -105,7 +112,7 @@
 		<div id="user-info"></div>
 		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Album</a></p>
 		<br/><br/><br/><br/>
-		<p><a href="#myAlbums" data-role="button" rel="external">My Albums</a></p>
+		<p><a href="#Home" data-role="button">My Albums</a></p>
 		<!--<p><a href="#settings" data-role="button">Settings</a></p>-->
 		<p><a href="#invitations" data-role="button">Album Invitations</a></p>			
 <!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
@@ -274,36 +281,9 @@
 	<p class="friend"></p>
 	
 	<div id="fb-root"></div>
-
-
-
-
-
-
-	
-	
-
-
-			
+		
 <div data-role="fieldcontain" class='friendList'>
-<!-- The code here is replaced in the loginUser() function
- 	<fieldset data-role="controlgroup">
-		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-		<label for="checkbox-1">Danny</label>
-    </fieldset>
-     	<fieldset data-role="controlgroup">
-		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-		<label for="checkbox-1">Jamin</label>
-    </fieldset>
-     	<fieldset data-role="controlgroup">
-		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-		<label for="checkbox-1">Connor</label>
-    </fieldset>
-     	<fieldset data-role="controlgroup">
-		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-		<label for="checkbox-1">Arvind</label>
-    </fieldset>
-    -->
+
 </div>
  <input type="submit" data-theme="b" value="Done" onClick="chooseFriends(this.form)">
 
@@ -312,6 +292,9 @@
 
 
 </div><!-- Friends List Test ends here -->
+
+
+
 
 
 <script>
@@ -370,7 +353,6 @@ function loginUser() {
 	console.log("here");
 	FB.api(apiQuery, function(response) { 
 		console.log(response)
-		localStorage.setItem('friendArray', response);
 		var friendString = '';
 		for(var i = 0; i<response.length; i++) {
 			friendString += '<fieldset data-role="controlgroup"> <input type="checkbox" name=checkbox-'+i.toString()+'" id="checkbox-' + i.toString() + '" class="custom" /> <label for="checkbox-' + i.toString() + '">' + response[i].name + '</label> </fieldset>';
@@ -399,5 +381,179 @@ function chooseFriends(friends) {
    
 </script>
 
+<!-- EVERYTHING BELOW HERE IS FOR THE MYalbum and Galleries -->
+
+<div data-role="page" id="Home" data-add-back-btn="true">
+
+	<div data-role="header">
+		<h1>My Albums</h1>
+		<!-- <a href="" data-role="button" class="ui-btn-left" rel="external">back</a> -->
+	</div>
+	
+	
+	<div data-role="content" >	
+			
+		<ul data-role="listview" data-inset="true">
+			<li><a href="#Gallery1">
+					<?php
+		include("config.php");
+		$query = "select distinct AlbumName from Albums where Friends = 'Jamin'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+			</a></li> 
+			<li><a href="#Gallery2" rel='external'>
+			
+				<?php
+		include("config.php");
+		$query = "select AlbumName from Albums where Friends = 'Danny'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+
+			</a></li> 
+		</ul> 
+		<p>Here will be a list of all your Albums</p>
+		<ul data-role="listview"  data-inset="true">
+		
+		<?php
+		include("config.php");
+		$query = "select * from Albums";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]." with ".$row["Friends"]."</p>";	
+		}
+		?>
+		
+		
+		</ul>
+		
+	</div>
+
+
+</div>
+
+
+<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page" >
+
+	<div data-role="header">
+		<h1>
+							<?php
+		include("config.php");
+		$query = "select AlbumName from Albums where Friends = 'Jamin'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+		</h1>
+	</div>
+
+	<div data-role="content">	
+		
+		<ul class="gallery">
+				
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 01"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 02"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 03"/></a></li>
+		
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 04"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 05"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 06"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 07"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 08"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 09"/></a></li>
+		</ul>
+		
+	</div>
+	
+</div>
+
+<div data-role="page" data-add-back-btn="true" id="Gallery2" class="gallery-page" rel='external'>
+
+	<div data-role="header">
+		<h1>
+			<?php
+		include("config.php");
+		$query = "select AlbumName from Albums where Friends = 'Danny'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			echo "<p>".$row["AlbumName"]."</p>";	
+		}
+		?>
+		</h1>
+	</div>
+
+	<div data-role="content">	
+		
+		<ul class="gallery">
+		
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" alt="Image 01"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" alt="Image 02"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 03"/></a></li>
+		
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" alt="Image 04"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 05"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" alt="Image 06"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 07"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" alt="Image 08"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" alt="Image 09"/></a></li>
+			
+
+		
+		</ul>
+		
+	</div>
+
+</div>
+
+
+	<script type="text/javascript">
+		
+		/*
+		 * IMPORTANT!!!
+		 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
+		 * If you don't this will mess with how jQuery Mobile works
+		 */
+		
+		(function(window, $, PhotoSwipe){
+			
+			$(document).ready(function(){
+				
+				$('div.gallery-page')
+					.live('pageshow', function(e){
+						
+						var 
+							currentPage = $(e.target),
+							options = {},
+							photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
+							
+						return true;
+						
+					})
+					
+					.live('pagehide', function(e){
+						
+						var 
+							currentPage = $(e.target),
+							photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+
+						if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+							PhotoSwipe.detatch(photoSwipeInstance);
+						}
+						
+						return true;
+						
+					});
+				
+			});
+		
+		}(window, window.jQuery, window.Code.PhotoSwipe));
+		
+	</script>
 </body>
 </html>

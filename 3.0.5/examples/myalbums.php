@@ -67,7 +67,7 @@
 
 	<div data-role="header">
 		<h1>My Albums</h1>
-		<a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/index.php" data-role="button" class="ui-btn-left" rel="external">back</a>
+		<a href="" data-role="button" class="ui-btn-left" rel="external">back</a>
 	</div>
 	
 	
