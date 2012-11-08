@@ -21,29 +21,36 @@
 </head> 
 <body>
 
-
-
-
-
-
 <div id="fb-root"></div>
 
-<div id="user-info"></div>
+<div data-role="page" id="login">
+
+	<div data-role="header">
+		<h1>Facebook Login</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+	<p><img src="images/mix.png" width="285" height="255"></p>
+	<div class="container">
+		<div class="loginform_cont">
+			<form id="login_form" enctype="multipart/form-data" method="post"><!-- action="#one"> -->
+				<input type="button" value="log in or continue (if logged in)" onclick="loginUser()" />
+			</form>
+		</div>
+	</div>	
+	
+	</div> <!-- end content -->
+
+
+</div>
+<!-- end of login page -->
+
+
+
+
+
 
 <script>
-  window.fbAsyncInit = function() {
-    // init the FB JS SDK
-    FB.init({
-      appId      : '448021921920652', // App ID from the App Dashboard
-      //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File for x-domain communication
-      status     : true, // check the login status upon init?
-      cookie     : true, // set sessions cookies to allow your server to access the session?
-      xfbml      : true  // parse XFBML tags on this page?
-    });
-
-    // Additional initialization code such as adding Event Listeners goes here
-
-  };
 
   // Load the SDK's source Asynchronously
   (function(d, debug){
@@ -63,6 +70,9 @@
 
 
 
+
+
+
 <!--
 		<div id="login">
      		<p><button onClick="loginUser();">Login</button></p>
@@ -72,14 +82,15 @@
      		<p><button  onClick="FB.logout();">Logout</button></p>
    		</div>
 -->
-<!-- This style is for Facebook login/logout stuff -->
+<!-- This style is for Facebook login/logout stuff 
 <style>
     body.connected #login { display: none; }
     body.connected #logout { display: block; }
     body.not_connected #login { display: block; }
     body.not_connected #logout { display: none; }
+    
 </style>
- 
+ -->
  
 
 <!-- Start of first page: #one -->
@@ -91,10 +102,10 @@
 
 	<div data-role="content">	
 
-
+		<div id="user-info"></div>
 		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Album</a></p>
 		<br/><br/><br/><br/>
-		<p><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/3.0.5/examples/myalbums.php" data-role="button" rel="external">My Albums</a></p>
+		<p><a href="#myAlbums" data-role="button" rel="external">My Albums</a></p>
 		<!--<p><a href="#settings" data-role="button">Settings</a></p>-->
 		<p><a href="#invitations" data-role="button">Album Invitations</a></p>			
 <!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
@@ -110,13 +121,7 @@
 	<div data-role="header">
 		<h1>My Albums</h1>
 	</div><!-- /header -->
-	
 
-
-
-	</div><!-- /content -->
-
-</div>
 </div><!-- /page two -->
 
 
@@ -241,16 +246,20 @@
 		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="enter.php">
 			<label for="album">Album Name:</label>
 			<input type="text" name="album" id="album">
+			<p><a href="#friendListTest" data-role="button" data-icon="plus">Add Friends</a></p>
+			
+			<div id="friendsChosen"></div>
+			
+			<!--
 			<label for="friend">Add Friend:</label>
 			<input type="text" name="friend" id="friend">
+			-->
 	        <input type="submit" data-theme="b" value="Create Album">
 			</form>	
-			<p><a href="#friendListTest" data-role="button" data-icon="plus">Friends List Test</a></p>	
+				
 		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
 		<p><a href="#one" data-role="button" data-icon="minus">Cancel</a></p>	
 	</div><!-- /content -->
-
-</div>
 </div><!-- /page popup -->
 
 
@@ -262,51 +271,22 @@
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">
-	<p class="friend">replace</p>
+	<p class="friend"></p>
 	
 	<div id="fb-root"></div>
-	<script>
-    (function() {
-      var e = document.createElement('script'); e.async = true;
-          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-          document.getElementById('fb-root').appendChild(e);
-          }());
-  </script>
-	<script>
-	  window.fbAsyncInit = function() {
-      FB.init({ appId: '448021921920652', 
-      status: true, 
-      cookie: true,
-      xfbml: true,
-      oauth: true});
- var apiQuery = 
-	{
-   method: 'fql.query',
-   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE 	uid2 = me() ) AND is_app_user'
-	}  
 
-FB.api(apiQuery, function(response) { 
-	console.log("danny");
-	console.log(response);
-	$(".friend").html(response[0].name);
-	 });
-      FB.Event.subscribe('auth.statusChange', handleStatusChange);	
-    };
-	</script>
-	<script>
-	function handleStatusChange(response) {
-     document.body.className = response.authResponse ? 'connected' : 'not_connected';
-    
-     if (response.authResponse) {
-       console.log(response);
-       updateUserInfo(response);
-     }
-}
-	</script>
+
+
+
+
+
 	
 	
-		
-<div data-role="fieldcontain">
+
+
+			
+<div data-role="fieldcontain" class='friendList'>
+<!-- The code here is replaced in the loginUser() function
  	<fieldset data-role="controlgroup">
 		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
 		<label for="checkbox-1">Danny</label>
@@ -323,19 +303,46 @@ FB.api(apiQuery, function(response) {
 		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
 		<label for="checkbox-1">Arvind</label>
     </fieldset>
+    -->
 </div>
- <input type="submit" data-theme="b" value="Done">
+ <input type="submit" data-theme="b" value="Done" onClick="chooseFriends(this.form)">
 
 
 	</div><!-- /content -->
 
-</div>
-</div><!-- /page popup -->
+
+</div><!-- Friends List Test ends here -->
 
 
+<script>
+    (function() {
+      var e = document.createElement('script'); e.async = true;
+          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+          document.getElementById('fb-root').appendChild(e);
+          }());
+  </script>
+	<script>
+window.fbAsyncInit = function() {
+      FB.init({ appId: '448021921920652', 
+      status: true, 
+      cookie: true,
+      xfbml: true,
+      oauth: true});
 
+    FB.Event.subscribe('auth.statusChange', handleStatusChange);	
+};
+	</script>
+	<script>
+	function handleStatusChange(response) {
+     document.body.className = response.authResponse ? 'connected' : 'not_connected';
+    
+     if (response.authResponse) {
+       console.log(response);
+       updateUserInfo(response);
+     }
+}
+</script>
 
-<!--Friends List Test end-->
 
 <!-- Facebook scripts here -->
 
@@ -349,12 +356,28 @@ function uploadButton() {
 function loginUser() {
    FB.login(function(response) {
    	if (response.authResponse) {
-   		window.location ="index.php/#one";}
+   		window.location ="#one";}
    		else {
    			alert ("Your login attempt failed. Please double check your username and password and try again.")
    		}
    			
-   	 }, {scope:'email'});  	
+   	 }, {scope:'email'});
+   	 
+    var apiQuery = {
+   method: 'fql.query',
+   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE uid2 = me() ) AND is_app_user'
+};  
+	console.log("here");
+	FB.api(apiQuery, function(response) { 
+		console.log(response)
+		localStorage.setItem('friendArray', response);
+		var friendString = '';
+		for(var i = 0; i<response.length; i++) {
+			friendString += '<fieldset data-role="controlgroup"> <input type="checkbox" name=checkbox-'+i.toString()+'" id="checkbox-' + i.toString() + '" class="custom" /> <label for="checkbox-' + i.toString() + '">' + response[i].name + '</label> </fieldset>';
+		}
+		$(".friendList").html(friendString);
+		
+	 });  	
  }
  
 
@@ -364,9 +387,15 @@ function loginUser() {
     function updateUserInfo(response) {
       FB.api('/me', function(response) {
         document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+        console.log(response);
       });
+      
     }
 
+function chooseFriends(friends) {
+	//document.getElementById("friendsChosen").innerHtml = friends.elements[0];
+	window.location ="#popup";
+}
    
 </script>
 

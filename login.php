@@ -24,30 +24,10 @@
   
 
 <div id="fb-root"></div>
-<div id="user-info"></div>
 
 
 
-<div data-role="page" id="login">
 
-	<div data-role="header">
-		<h1>Facebook Login</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">	
-	<p><img src="images/mix.png" width="285" height="255"></p>
-	<div class="container">
-		<div class="loginform_cont">
-			<form id="login_form" enctype="multipart/form-data" method="post" action="#one">
-				<input type="button" value="log in or continue (if logged in)" onclick="loginUser()" />
-			</form>
-		</div>
-	</div>	
-	
-	</div>
-
-
-</div>
 
 	<script type="text/javascript">
 	$("#logout").hide();
@@ -72,9 +52,12 @@ function uploadButton() {
 
 function loginUser() {
    FB.login(function(response) {
-   	if (response.authResponse) {
+   		if (response.authResponse) {
    		//alert(response.authResponse.accessToken);
-   		window.location ="index.php";}
+   		
+   		
+   		window.location ="index.php";
+   		}
    		else {
    			alert ("Your login attempt failed. Please double check your username and password and try again.")
    		}
@@ -105,6 +88,7 @@ function handleStatusChange(response) {
       FB.api('/me', function(response) {
         document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
       });
+      console.log("UPDATED THAT SHIT");
     }
 
     (function() {
@@ -112,6 +96,7 @@ function handleStatusChange(response) {
           e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
           document.getElementById('fb-root').appendChild(e);
           }());
+
 
 </script>
 </div><!-- /page -->
