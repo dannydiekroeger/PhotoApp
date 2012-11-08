@@ -24,6 +24,8 @@
 
 
 <div id="fb-root"></div>
+
+
 <script>
   window.fbAsyncInit = function() {
     // init the FB JS SDK
@@ -47,6 +49,82 @@
      js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
      ref.parentNode.insertBefore(js, ref);
    }(document, /*debug*/ false));
+</script>
+
+<script type="text/javascript">
+
+
+function uploadButton() {
+	$('#image_file').trigger('click');
+	startUploading();
+}
+
+function loginUser() {    
+   FB.login(function(response) { }, {scope:'email'});  	
+ }
+ 
+function handleStatusChange(response) {
+     document.body.className = response.authResponse ? 'connected' : 'not_connected';
+    
+     if (response.authResponse) {
+       console.log(response);
+       updateUserInfo(response);
+     }
+}
+
+    window.fbAsyncInit = function() {
+      FB.init({ appId: '448021921920652', 
+      status: true, 
+      cookie: true,
+      xfbml: true,
+      oauth: true});
+ 
+      FB.Event.subscribe('auth.statusChange', handleStatusChange);	
+    };
+
+    function updateUserInfo(response) {
+      FB.api('/me', function(response) {
+        document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+      });
+    }
+
+    (function() {
+      var e = document.createElement('script'); e.async = true;
+          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+          document.getElementById('fb-root').appendChild(e);
+          }());
+// This handles all the swiping between each page. You really
+// needn't understand it all.
+/*
+
+
+
+$(document).on('pageshow', 'div:jqmData(role="page")', function(){
+
+     var page = $(this), nextpage, prevpage;
+     // check if the page being shown already has a binding
+      if ( page.jqmData('bound') != true ){
+            // if not, set blocker
+            page.jqmData('bound', true)
+            // bind
+                .on('swipeleft.paginate', function() {
+                    console.log("binding to swipe-left on "+page.attr('id'));
+                    nextpage = page.next('div[data-role="page"]');
+                    if (nextpage.length > 0) {
+                       $.mobile.changePage(nextpage,{transition: "slide"}, false, true);
+                        }
+                    })
+                .on('swiperight.paginate', function(){
+                    console.log("binding to swipe-right "+page.attr('id'));
+                    prevpage = page.prev('div[data-role="page"]');
+                    if (prevpage.length > 0) {
+                        $.mobile.changePage(prevpage, {transition: "slide",
+	reverse: true}, true, true);
+                        };
+                     });
+            }
+        });
+*/
 </script>
 
 
@@ -286,11 +364,12 @@
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">
-	<p class="friend"></p>
+	<p class="friend">replace </p>
 	
 	
 	
 	<script>
+	$(function(){
 	var apiQuery = 
 	{
    method: 'fql.query',
@@ -298,8 +377,8 @@
 	}  
 
 FB.api(apiQuery, function(response) { 
+	console.log(response);
 	$(".friend").html(response[0].name);
-	alert(response);
 	 });
 	});
 	</script>
@@ -368,7 +447,7 @@ FB.api(apiQuery, function(response) {
 <!--Friends List Test end-->
 
 <!-- Facebook scripts here -->
-
+<!--
 <script type="text/javascript">
 
 
@@ -411,6 +490,7 @@ function handleStatusChange(response) {
           e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
           document.getElementById('fb-root').appendChild(e);
           }());
+          -->
 // This handles all the swiping between each page. You really
 // needn't understand it all.
 /*
