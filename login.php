@@ -19,7 +19,15 @@
 
 </head>  
 <body> 
+
+
+  
+
 <div id="fb-root"></div>
+<div id="user-info"></div>
+
+
+
 <div data-role="page" id="login">
 
 	<div data-role="header">
@@ -35,43 +43,11 @@
 			</form>
 		</div>
 	</div>	
-
-<!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
-	</div><!-- /content --> 
 	
 	</div>
 
 
-</div>  
-
-
-<!--
-<div data-role="page">
-
-	<div data-role="header">
-	<h1>Log in</h1>
-	<a href="#" data-icon="check" id="logout" class="ui-btn-right">Logout</a>
-
-	</div><!-- /header -->
-<!--
-	<div data-role="content">
-	
-	<p>The form should go here</p>
-		<div data-role="fieldcontain">
-			<form action="enter.php" method="post">
-			<label for="foo">Event Name:</label>
-			<input type="text" name="username" id="foo">
-			<label for="bar">Add Friend:</label> #this will become a list menu of facebook friends
-			<input type="password" name="password" id="bar">
-	        <input type="submit" value="Login">
-			</form>	
-		</div>	
-	
-		
-	<div id="info">
-		<p>Thank you for logging. You should be able to see all sorts of user information here.</p>
-	</div>	
-	</div><!-- /content -->
+</div>
 
 	<script type="text/javascript">
 	$("#logout").hide();
@@ -136,38 +112,7 @@ function handleStatusChange(response) {
           e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
           document.getElementById('fb-root').appendChild(e);
           }());
-// This handles all the swiping between each page. You really
-// needn't understand it all.
-/*
 
-
-
-$(document).on('pageshow', 'div:jqmData(role="page")', function(){
-
-     var page = $(this), nextpage, prevpage;
-     // check if the page being shown already has a binding
-      if ( page.jqmData('bound') != true ){
-            // if not, set blocker
-            page.jqmData('bound', true)
-            // bind
-                .on('swipeleft.paginate', function() {
-                    console.log("binding to swipe-left on "+page.attr('id'));
-                    nextpage = page.next('div[data-role="page"]');
-                    if (nextpage.length > 0) {
-                       $.mobile.changePage(nextpage,{transition: "slide"}, false, true);
-                        }
-                    })
-                .on('swiperight.paginate', function(){
-                    console.log("binding to swipe-right "+page.attr('id'));
-                    prevpage = page.prev('div[data-role="page"]');
-                    if (prevpage.length > 0) {
-                        $.mobile.changePage(prevpage, {transition: "slide",
-	reverse: true}, true, true);
-                        };
-                     });
-            }
-        });
-*/
 </script>
 </div><!-- /page -->
 

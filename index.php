@@ -23,8 +23,12 @@
 
 
 
+
+
+
 <div id="fb-root"></div>
 
+<div id="user-info"></div>
 
 <script>
   window.fbAsyncInit = function() {
@@ -51,91 +55,20 @@
    }(document, /*debug*/ false));
 </script>
 
-<script type="text/javascript">
-
-
-function uploadButton() {
-	$('#image_file').trigger('click');
-	startUploading();
-}
-
-function loginUser() {    
-   FB.login(function(response) { }, {scope:'email'});  	
- }
- 
-function handleStatusChange(response) {
-     document.body.className = response.authResponse ? 'connected' : 'not_connected';
-    
-     if (response.authResponse) {
-       console.log(response);
-       updateUserInfo(response);
-     }
-}
-
-    window.fbAsyncInit = function() {
-      FB.init({ appId: '448021921920652', 
-      status: true, 
-      cookie: true,
-      xfbml: true,
-      oauth: true});
- 
-      FB.Event.subscribe('auth.statusChange', handleStatusChange);	
-    };
-
-    function updateUserInfo(response) {
-      FB.api('/me', function(response) {
-        document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
-      });
-    }
-
-    (function() {
-      var e = document.createElement('script'); e.async = true;
-          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-          document.getElementById('fb-root').appendChild(e);
-          }());
-// This handles all the swiping between each page. You really
-// needn't understand it all.
-/*
 
 
 
-$(document).on('pageshow', 'div:jqmData(role="page")', function(){
 
-     var page = $(this), nextpage, prevpage;
-     // check if the page being shown already has a binding
-      if ( page.jqmData('bound') != true ){
-            // if not, set blocker
-            page.jqmData('bound', true)
-            // bind
-                .on('swipeleft.paginate', function() {
-                    console.log("binding to swipe-left on "+page.attr('id'));
-                    nextpage = page.next('div[data-role="page"]');
-                    if (nextpage.length > 0) {
-                       $.mobile.changePage(nextpage,{transition: "slide"}, false, true);
-                        }
-                    })
-                .on('swiperight.paginate', function(){
-                    console.log("binding to swipe-right "+page.attr('id'));
-                    prevpage = page.prev('div[data-role="page"]');
-                    if (prevpage.length > 0) {
-                        $.mobile.changePage(prevpage, {transition: "slide",
-	reverse: true}, true, true);
-                        };
-                     });
-            }
-        });
-*/
-</script>
+
 
 
 
 <!--
-<div id="fb-root"></div>
 		<div id="login">
      		<p><button onClick="loginUser();">Login</button></p>
   		</div>
    		<div id="logout">
-     	<div id="user-info"></div>
+     	
      		<p><button  onClick="FB.logout();">Logout</button></p>
    		</div>
 -->
@@ -155,10 +88,6 @@ $(document).on('pageshow', 'div:jqmData(role="page")', function(){
 		<h1>Trail Mix</h1>
 <a href="#Help" data-role="button" class="ui-btn-right" data-rel="dialog">?</a>	
 	</div><!-- /header -->
-
-<script>
-	alert(response.authResponse.accessToken);
-	</script>
 
 	<div data-role="content">	
 
@@ -183,38 +112,7 @@ $(document).on('pageshow', 'div:jqmData(role="page")', function(){
 	</div><!-- /header -->
 	
 
-<!-- THIS IS THE DATABASE CODE, COMMENTED OUT SO I CAN TEST ALBUM AESTHETICS
-	<div data-role="content">	
-		<p>Here will be a list of all your Albums</p>
-		<ul data-role="listview"  data-inset="true">
-		
-		<?php
-		include("config.php");
-		$query = "select * from Albums";
-		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)) {
-			echo "<p>".$row["Album Name"]."with ".$row["Friends"]."</p>";	
-		}
-		?>
-		</ul>
-		END OF DATABASE CODE COMMENTED OUT-->
-		<!--
-		<ul data-role="listview"  data-inset="true">
-			<li>
-			<a href="#Albumgallery"><img src="images/WaterColor.Sunset.JPG" alt="Pic" class="ui-li-thumbnail">Florida Vacation</a>
-			</li>
-			<li>
-			<a href="#Albumgallery"><img src="images/mom.JPG" alt="mom" class="ui-li-thumbnail">Baseball Game</a>
-			</li>
-			<li>
-			<a href="#Albumgallery"><img src="images/obama.jpeg" alt="obamapic" class="ui-li-thumbnail">Dinner with Barack</a>
-			</li>
-			<li>
-			<a href="#Albumgallery"><img src="images/romney.png" alt="romneypic" class="ui-li-thumbnail">Lunch with Mitt</a>
-			</li>
-		
-		</ul>
-		-->
+
 
 	</div><!-- /content -->
 
@@ -364,56 +262,49 @@ $(document).on('pageshow', 'div:jqmData(role="page")', function(){
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">
-	<p class="friend">replace </p>
+	<p class="friend">replace</p>
 	
-	
-	
+	<div id="fb-root"></div>
 	<script>
-	$(function(){
-	var apiQuery = 
+    (function() {
+      var e = document.createElement('script'); e.async = true;
+          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+          document.getElementById('fb-root').appendChild(e);
+          }());
+  </script>
+	<script>
+	  window.fbAsyncInit = function() {
+      FB.init({ appId: '448021921920652', 
+      status: true, 
+      cookie: true,
+      xfbml: true,
+      oauth: true});
+ var apiQuery = 
 	{
    method: 'fql.query',
    query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE 	uid2 = me() ) AND is_app_user'
 	}  
 
 FB.api(apiQuery, function(response) { 
+	console.log("danny");
 	console.log(response);
 	$(".friend").html(response[0].name);
 	 });
-	});
+      FB.Event.subscribe('auth.statusChange', handleStatusChange);	
+    };
 	</script>
-	
-	<!--
 	<script>
-	function fbEnsureInit(callback) {
-  
-	
-	
-        if(!window.fbApiInit) {
-            setTimeout(function() {fbEnsureInit(callback);}, 50);
-        } else {
-            if(callback) {
-                callback();
-            }
-        }
-    }
+	function handleStatusChange(response) {
+     document.body.className = response.authResponse ? 'connected' : 'not_connected';
     
-    fbEnsureInit(function() {
-    alert("khjl");
-    var apiQuery = 
-{
-   method: 'fql.query',
-   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE uid2 = me() ) AND is_app_user order by concat(first_name,last_name) asc'
-}  
-
-FB.api(apiQuery, function(response) { 
-	$(".friend").html(response[0].name);
-	alert(response);
-	 });
-	});
+     if (response.authResponse) {
+       console.log(response);
+       updateUserInfo(response);
+     }
+}
 	</script>
-	-->
-
+	
+	
 		
 <div data-role="fieldcontain">
  	<fieldset data-role="controlgroup">
@@ -447,37 +338,28 @@ FB.api(apiQuery, function(response) {
 <!--Friends List Test end-->
 
 <!-- Facebook scripts here -->
-<!--
+
 <script type="text/javascript">
-
-
 function uploadButton() {
 	$('#image_file').trigger('click');
 	startUploading();
 }
 
-function loginUser() {    
-   FB.login(function(response) { }, {scope:'email'});  	
+
+function loginUser() {
+   FB.login(function(response) {
+   	if (response.authResponse) {
+   		window.location ="index.php/#one";}
+   		else {
+   			alert ("Your login attempt failed. Please double check your username and password and try again.")
+   		}
+   			
+   	 }, {scope:'email'});  	
  }
  
-function handleStatusChange(response) {
-     document.body.className = response.authResponse ? 'connected' : 'not_connected';
-    
-     if (response.authResponse) {
-       console.log(response);
-       updateUserInfo(response);
-     }
-}
 
-    window.fbAsyncInit = function() {
-      FB.init({ appId: '448021921920652', 
-      status: true, 
-      cookie: true,
-      xfbml: true,
-      oauth: true});
- 
-      FB.Event.subscribe('auth.statusChange', handleStatusChange);	
-    };
+
+
 
     function updateUserInfo(response) {
       FB.api('/me', function(response) {
@@ -485,44 +367,7 @@ function handleStatusChange(response) {
       });
     }
 
-    (function() {
-      var e = document.createElement('script'); e.async = true;
-          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-          document.getElementById('fb-root').appendChild(e);
-          }());
-          -->
-// This handles all the swiping between each page. You really
-// needn't understand it all.
-/*
-
-
-
-$(document).on('pageshow', 'div:jqmData(role="page")', function(){
-
-     var page = $(this), nextpage, prevpage;
-     // check if the page being shown already has a binding
-      if ( page.jqmData('bound') != true ){
-            // if not, set blocker
-            page.jqmData('bound', true)
-            // bind
-                .on('swipeleft.paginate', function() {
-                    console.log("binding to swipe-left on "+page.attr('id'));
-                    nextpage = page.next('div[data-role="page"]');
-                    if (nextpage.length > 0) {
-                       $.mobile.changePage(nextpage,{transition: "slide"}, false, true);
-                        }
-                    })
-                .on('swiperight.paginate', function(){
-                    console.log("binding to swipe-right "+page.attr('id'));
-                    prevpage = page.prev('div[data-role="page"]');
-                    if (prevpage.length > 0) {
-                        $.mobile.changePage(prevpage, {transition: "slide",
-	reverse: true}, true, true);
-                        };
-                     });
-            }
-        });
-*/
+   
 </script>
 
 </body>
