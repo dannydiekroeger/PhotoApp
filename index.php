@@ -154,6 +154,37 @@
 </div><!-- end Album Gallery-->
 
 
+<!-- Start of Album Gallery page-->
+<div data-role="page" id="Albumgallery2" class="gallery-page">
+	<div data-role="header" >
+		<h1 id="galleryHeader">Album Gallery</h1> 
+		<a href ="#all" data-role="button" data-icon="arrow-l" class="ui-btn-left" >Back</a>
+	</div><!-- /header -->
+	<div data-role="content" id="galleryContent">
+		
+		<ul class="gallery">
+
+      <?php
+			include('config.php');
+			$picquery = "SELECT * from Gallery";
+			$picresult = mysql_query($picquery);
+			while($bro = mysql_fetch_assoc($picresult)) {
+				$path = "uploads/".$bro['PhotoPath'];
+				echo "<li><a href='$path' rel='external'><img width='91' height='131' src='$path'/></a></li>";	
+			}
+		
+		?>	
+
+				
+			
+		</ul>
+		
+	
+	
+	</div><!-- /content -->
+
+</div><!-- end Album Gallery-->
+
 
 <!-- confirm event leaving popup-->
 <div data-role="page" id="confirmAlbumLeave">
@@ -441,11 +472,12 @@ function chooseFriends(friends) {
                         </div>
                         <div id="upload_response"></div>
                     </div>
-                    <a href='#Albumgallery' data-role='button' data-theme='d'>Album Gallery</a>
-           	<p><a href="#confirmAlbumLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>
-                    <div>
+                      <div>
                         <input type="button" value="Upload" onclick="startUploading()"/>
                     </div>
+                    <a href='#Albumgallery2' data-role='button' data-theme='d'>Album Gallery</a>
+           	<p><a href="#confirmAlbumLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>
+                  
                 </form>
                 <img id="preview" />
             </div> <!-- close upload_form_cont -->
