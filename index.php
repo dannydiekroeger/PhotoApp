@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html> 
 <html>
 <!-- cboskii baby!! Jamin-->
@@ -22,7 +24,9 @@
 	<script type="text/javascript" src="3.0.5/lib/klass.min.js"></script>
 	<script type="text/javascript" src="3.0.5/code.photoswipe.jquery-3.0.5.min.js"></script>
 	<link href="3.0.5/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="upload-example/js/script.js"></script>
+	
+	<link href="css/main.css" rel="stylesheet" type="text/css" />
+    <script src="js/script.js"></script>
 
 	
 </head> 
@@ -260,6 +264,7 @@
 		//var str = '<h1><?php echo $albumName ?></h1>';
 		
 		$("#albumHeader").html(str);
+		document.forms['upload_form'].elements['albumname'].value = str;
 		window.location = "#all";
 	}
 
@@ -330,6 +335,17 @@ function uploadButton() {
 	$('#image_file').trigger('click');
 	
 	var form = document.forms['upload_form'];
+	
+	<?php
+		include('config.php');
+		$countquery = 'SELECT * FROM Gallery';
+		$countresult = mysql_query($countquery);
+		$rows = mysql_num_rows($countresult) + 1;
+		
+	?>
+	
+	
+	
 	console.log(form);
 }
 
@@ -395,25 +411,22 @@ function chooseFriends(friends) {
             <div class="upload_form_cont">
                 <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
                     <div>
-                        <div><h2 for="image_file">Take or Upload a Photo!</h2>
-
-                        </div>
-                        
-                        </br>
-                        <input type="button" value="Take or Upload a Pic!" onclick="fileSelected();" />
-                        <!-- make it upload right away, not "fileSelected()" 
-                        onchange="startUploading();" took out style=display:none-->
-                        <div><input type="file" name="image_file" id="image_file" onchange="startUploading()"/></div>
+                    	<input type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
+                    	<input type="text" name="albumname" id="albumname" style="display:none"/>
+                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();"   style="display:none"/></div>
                     </div>
-                    </br></br>
-					<a href='#Albumgallery' data-role='button' data-theme='d'>Album Gallery</a>
-           	<p><a href="#confirmAlbumLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>	
+
                     <div id="fileinfo">
                         <div id="filename"></div>
                         <div id="filesize"></div>
                         <div id="filetype"></div>
                         <div id="filedim"></div>
                     </div>
+                    <div id="error">You should select valid image files only!</div>
+                    <div id="error2">An error occurred while uploading the file</div>
+                    <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
+                    <div id="warnsize"></div>
+
                     <div id="progress_info">
                         <div id="progress"></div>
                         <div id="progress_percent">&nbsp;</div>
@@ -425,7 +438,11 @@ function chooseFriends(friends) {
                             <div class="clear_both"></div>
                         </div>
                         <div id="upload_response"></div>
-                        <div id="error"></div>
+                    </div>
+                    <a href='#Albumgallery' data-role='button' data-theme='d'>Album Gallery</a>
+           	<p><a href="#confirmAlbumLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>
+                    <div>
+                        <input type="button" value="Upload" onclick="startUploading()"/>
                     </div>
                 </form>
                 <img id="preview" />
