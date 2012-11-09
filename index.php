@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="3.0.5/lib/klass.min.js"></script>
 	<script type="text/javascript" src="3.0.5/code.photoswipe.jquery-3.0.5.min.js"></script>
 	<link href="3.0.5/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
-	
+	<script type="text/javascript" src="upload-example/js/script.js"></script>
 
 	
 </head> 
@@ -69,36 +69,6 @@
    }(document, /*debug*/ false));
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-<!--
-		<div id="login">
-     		<p><button onClick="loginUser();">Login</button></p>
-  		</div>
-   		<div id="logout">
-     	
-     		<p><button  onClick="FB.logout();">Logout</button></p>
-   		</div>
--->
-<!-- This style is for Facebook login/logout stuff 
-<style>
-    body.connected #login { display: none; }
-    body.connected #logout { display: block; }
-    body.not_connected #login { display: block; }
-    body.not_connected #logout { display: none; }
-    
-</style>
- -->
- 
 
 <!-- Start of first page: #one -->
 <div data-role="page" id="one">
@@ -149,21 +119,30 @@
 
 
 <!-- Start of Album Gallery page-->
-<div data-role="page" id="Albumgallery" data-add-back-btn="true">
-
-
-
-		
-	<div data-role="header" id="galleryHeader">
-		<script type="text/javascript">
-			//document.getElementById("galleryHeader").innerHTML = "<h1>" + localStorage.getItem('album') + "</h1>";
-			
-		</script>
-	<h1>Album Gallery</h1>
-	
+<div data-role="page" id="Albumgallery" data-add-back-btn="true" class="gallery-page">
+	<div data-role="header" >
+		<h1 id="galleryHeader">Album Gallery</h1> 
 		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
 	</div><!-- /header -->
+	<div data-role="content" id="galleryContent">
 	<p> Gallery will go here </p>
+		
+		<ul class="gallery">
+				
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 01"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 02"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 03"/></a></li>
+		
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 04"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 05"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 06"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 07"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 08"/></a></li>
+			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 09"/></a></li>
+		</ul>
+		
+	
+	
 	</div><!-- /content -->
 
 </div><!-- end Album Gallery-->
@@ -250,7 +229,7 @@
 	<div data-role="content" data-theme="d">	
 		<h2>Create an Album</h2>
 		<!--Will need to change action to process data!! with method = post-->
-		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="enter.php">
+		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="createAlbum.php">
 			<label for="album">Album Name:</label>
 			<input type="text" name="album" id="album">
 			<p><a href="#friendListTest" data-role="button" data-icon="plus">Add Friends</a></p>
@@ -260,14 +239,31 @@
 			<!--
 			<label for="friend">Add Friend:</label>
 			<input type="text" name="friend" id="friend">
+			took out type="submit"
 			-->
-	        <input type="submit" data-theme="b" value="Create Album">
+			
+	        <input type="submit" data-theme="b" value="Create Album" onClick="createAlbum()">
 			</form>	
 				
 		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
 		<p><a href="#one" data-role="button" data-icon="minus">Cancel</a></p>	
 	</div><!-- /content -->
 </div><!-- /page popup -->
+
+<script>
+	function createAlbum() {
+		var str = document.forms['createalbum_form']['album'].value;
+		
+		
+		
+		//var str = <?php echo $albumName; ?>;
+		//var str = '<h1><?php echo $albumName ?></h1>';
+		
+		$("#albumHeader").html(str);
+		window.location = "#all";
+	}
+
+</script>
 
 
 <!--Friends List Test start -->
@@ -332,7 +328,9 @@ window.fbAsyncInit = function() {
 <script type="text/javascript">
 function uploadButton() {
 	$('#image_file').trigger('click');
-	startUploading();
+	
+	var form = document.forms['upload_form'];
+	console.log(form);
 }
 
 
@@ -345,8 +343,7 @@ function loginUser() {
    		}
    			
    	 }, {scope:'email'});
-   	 
-    var apiQuery = {
+   	       var apiQuery = {
    method: 'fql.query',
    query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE uid2 = me() ) AND is_app_user'
 };  
@@ -358,11 +355,10 @@ function loginUser() {
 			friendString += '<fieldset data-role="controlgroup"> <input type="checkbox" name=checkbox-'+i.toString()+'" id="checkbox-' + i.toString() + '" class="custom" /> <label for="checkbox-' + i.toString() + '">' + response[i].name + '</label> </fieldset>';
 		}
 		$(".friendList").html(friendString);
-		
+    		
 	 });  	
  }
  
-
 
 
 
@@ -381,6 +377,68 @@ function chooseFriends(friends) {
    
 </script>
 
+<!-- HERE is a page for the current album -->
+
+<!-- Album page-->
+<div data-role="page" id="all">
+
+	<!-- Header in PHP -->
+	<div data-role='header'>
+		<h1 id='albumHeader'></h1>
+	</div>
+	<div data-role="content">
+				
+				
+	<!--Camera access -->	
+		<div class="container">
+            
+            <div class="upload_form_cont">
+                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
+                    <div>
+                        <div><h2 for="image_file">Take or Upload a Photo!</h2>
+
+                        </div>
+                        
+                        </br>
+                        <input type="button" value="Take or Upload a Pic!" onclick="fileSelected();" />
+                        <!-- make it upload right away, not "fileSelected()" 
+                        onchange="startUploading();" took out style=display:none-->
+                        <div><input type="file" name="image_file" id="image_file" onchange="startUploading()"/></div>
+                    </div>
+                    </br></br>
+					<a href='#Albumgallery' data-role='button' data-theme='d'>Album Gallery</a>
+           	<p><a href="#confirmAlbumLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>	
+                    <div id="fileinfo">
+                        <div id="filename"></div>
+                        <div id="filesize"></div>
+                        <div id="filetype"></div>
+                        <div id="filedim"></div>
+                    </div>
+                    <div id="progress_info">
+                        <div id="progress"></div>
+                        <div id="progress_percent">&nbsp;</div>
+                        <div class="clear_both"></div>
+                        <div>
+                            <div id="speed">&nbsp;</div>
+                            <div id="remaining">&nbsp;</div>
+                            <div id="b_transfered">&nbsp;</div>
+                            <div class="clear_both"></div>
+                        </div>
+                        <div id="upload_response"></div>
+                        <div id="error"></div>
+                    </div>
+                </form>
+                <img id="preview" />
+            </div> <!-- close upload_form_cont -->
+        </div>	
+		<!-- end camera access-->	
+	</div><!-- /content -->
+</div><!-- end Album page-->
+
+
+
+
+
 <!-- EVERYTHING BELOW HERE IS FOR THE MYalbum and Galleries -->
 
 <div data-role="page" id="Home" data-add-back-btn="true">
@@ -392,9 +450,9 @@ function chooseFriends(friends) {
 	
 	
 	<div data-role="content" >	
-			
+		<!--	
 		<ul data-role="listview" data-inset="true">
-			<li><a href="#Gallery1">
+			<li><a href="#Albumgallery" onClick="populateGallery()">
 					<?php
 		include("config.php");
 		$query = "select distinct AlbumName from Albums where Friends = 'Jamin'";
@@ -404,9 +462,9 @@ function chooseFriends(friends) {
 		}
 		?>
 			</a></li> 
-			<li><a href="#Gallery2" rel='external'>
+			<li><a href="#Albumgallery">
 			
-				<?php
+		<?php
 		include("config.php");
 		$query = "select AlbumName from Albums where Friends = 'Danny'";
 		$result = mysql_query($query);
@@ -417,7 +475,7 @@ function chooseFriends(friends) {
 
 			</a></li> 
 		</ul> 
-		<p>Here will be a list of all your Albums</p>
+		-->
 		<ul data-role="listview"  data-inset="true">
 		
 		<?php
@@ -425,7 +483,11 @@ function chooseFriends(friends) {
 		$query = "select * from Albums";
 		$result = mysql_query($query);
 		while($row = mysql_fetch_assoc($result)) {
-			echo "<p>".$row["AlbumName"]." with ".$row["Friends"]."</p>";	
+			$current = 'no name';
+			if($row["AlbumName"] != null) {
+				$current = $row["AlbumName"];
+			}
+			echo "<li><a href='#Albumgallery' onClick='populateGallery(\"$current\")'>".$row["AlbumName"]." with ".$row["Friends"]."</a></li>";	
 		}
 		?>
 		
@@ -437,79 +499,15 @@ function chooseFriends(friends) {
 
 </div>
 
+<script>
+function populateGallery(name) {
+	$('#galleryHeader').html(name);
+	console.log("I am testing like a champ");
+}
+</script>
 
-<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page" >
 
-	<div data-role="header">
-		<h1>
-							<?php
-		include("config.php");
-		$query = "select AlbumName from Albums where Friends = 'Jamin'";
-		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)) {
-			echo "<p>".$row["AlbumName"]."</p>";	
-		}
-		?>
-		</h1>
-	</div>
 
-	<div data-role="content">	
-		
-		<ul class="gallery">
-				
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 01"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 02"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 03"/></a></li>
-		
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 04"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 05"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 06"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 07"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 08"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 09"/></a></li>
-		</ul>
-		
-	</div>
-	
-</div>
-
-<div data-role="page" data-add-back-btn="true" id="Gallery2" class="gallery-page" rel='external'>
-
-	<div data-role="header">
-		<h1>
-			<?php
-		include("config.php");
-		$query = "select AlbumName from Albums where Friends = 'Danny'";
-		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)) {
-			echo "<p>".$row["AlbumName"]."</p>";	
-		}
-		?>
-		</h1>
-	</div>
-
-	<div data-role="content">	
-		
-		<ul class="gallery">
-		
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" alt="Image 01"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" alt="Image 02"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 03"/></a></li>
-		
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" alt="Image 04"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 05"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" alt="Image 06"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 07"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test2.jpeg" alt="Image 08"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test1.jpeg" alt="Image 09"/></a></li>
-			
-
-		
-		</ul>
-		
-	</div>
-
-</div>
 
 
 	<script type="text/javascript">
