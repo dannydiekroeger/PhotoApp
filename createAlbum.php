@@ -13,7 +13,7 @@
 		include("config.php");
 		$albumName = $_POST["album"];
 		$query = "INSERT INTO Albums VALUES 
-		('$albumName', 'test2','NULL', 'NULL')";
+		('$albumName', 'NULL','NULL', 'NULL')";
 		$result = mysql_query($query);
 		if ($_POST["album"] == "album") {
 				

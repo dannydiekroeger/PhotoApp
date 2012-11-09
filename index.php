@@ -129,20 +129,22 @@
 		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
 	</div><!-- /header -->
 	<div data-role="content" id="galleryContent">
-	<p> Gallery will go here </p>
 		
 		<ul class="gallery">
-				
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 01"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 02"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 03"/></a></li>
+
+      <?php
+			include('config.php');
+			$picquery = "SELECT * from Gallery";
+			$picresult = mysql_query($picquery);
+			while($bro = mysql_fetch_assoc($picresult)) {
+				$path = "uploads/".$bro['PhotoPath'];
+				echo "<li><a href='$path' rel='external'><img width='91' height='131' src='$path'/></a></li>";	
+			}
 		
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 04"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 05"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 06"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/romney.png" alt="Image 07"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/test4.jpeg" alt="Image 08"/></a></li>
-			<li><a href="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" rel="external"><img width="91" height="131" src="http://stanford.edu/~connorb/cgi-bin/PhotoApp/images/obama.jpeg" alt="Image 09"/></a></li>
+		?>	
+
+				
+			
 		</ul>
 		
 	
@@ -504,7 +506,7 @@ function chooseFriends(friends) {
 			if($row["AlbumName"] != null) {
 				$current = $row["AlbumName"];
 			}
-			echo "<li><a href='#Albumgallery' onClick='populateGallery(\"$current\")'>".$row["AlbumName"]." with ".$row["Friends"]."</a></li>";	
+			echo "<li><a href='#Albumgallery' onClick='populateGallery(\"$current\")'>".$row["AlbumName"]."</a></li>";	
 		}
 		?>
 		
@@ -520,6 +522,7 @@ function chooseFriends(friends) {
 function populateGallery(name) {
 	$('#galleryHeader').html(name);
 	console.log("I am testing like a champ");
+
 }
 </script>
 
