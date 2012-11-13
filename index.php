@@ -126,7 +126,7 @@
 <div data-role="page" id="Albumgallery" data-add-back-btn="true" class="gallery-page">
 	<div data-role="header" >
 		<h1 id="galleryHeader">Album Gallery</h1> 
-		<!--<a href ="#Album" data-role="button" data-icon="plus" class="ui-btn-right" >Add</a>-->
+		<a href ="#addPhoto" data-role="button" data-icon="plus" class="ui-btn-right" >New Photo</a>
 	</div><!-- /header -->
 	<div data-role="content" id="galleryContent">
 		
@@ -158,7 +158,7 @@
 <div data-role="page" id="Albumgallery2" class="gallery-page">
 	<div data-role="header" >
 		<h1 id="galleryHeader">Album Gallery</h1> 
-		<a href ="#all" data-role="button" data-icon="arrow-l" class="ui-btn-left" >Back</a>
+		<a href ="#addPhoto" data-role="button" data-icon="arrow-l" class="ui-btn-left" >Back</a>
 	</div><!-- /header -->
 	<div data-role="content" id="galleryContent">
 		
@@ -195,7 +195,7 @@
 
 	<div data-role="content">	
 		<h2>Are you sure you want to stop contributing to this album?</h2>
-		<a href="#one" data-role="button" data-theme="d" data-pos="right">Yes, stop contributing</a>
+		<a href="#Home" data-role="button" data-theme="d" data-pos="right">Yes, stop contributing</a>
 		<a href="#invitations" data-role="button" data-theme="d" data-pos="right" data-rel="back">Let me reconsider</a>		
 	</div><!-- /content -->
 
@@ -248,7 +248,7 @@
 
 	<div data-role="content">	
 		<h2>Are you sure you want to decline the invite?</h2>
-		<a href="#one" data-role="button" data-theme="d" data-pos="right">Yes, Decline</a>
+		<a href="#Home" data-role="button" data-theme="d" data-pos="right">Yes, Decline</a>
 		<a href="#invitations" data-role="button" data-theme="d" data-pos="right" data-rel="back">Let me reconsider</a>		
 	</div><!-- /content -->
 </div>
@@ -259,7 +259,9 @@
 <!-- Start of third page: #popup -->
 <div data-role="page" id="popup">
 
-	<div data-role="header" data-theme="e">
+	<div data-role="header" data-theme="a" data-add-back-btn="true">
+			<a href ="#Home" data-role="button" data-icon="arrow-l" class="ui-btn-left" >Back</a>
+
 		<h1>Create an Album</h1>
 	</div><!-- /header -->
 
@@ -283,7 +285,6 @@
 			</form>	
 				
 		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
-		<p><a href="#one" data-role="button" data-icon="minus">Cancel</a></p>	
 	</div><!-- /content -->
 </div><!-- /page popup -->
 
@@ -298,7 +299,7 @@
 		
 		$("#albumHeader").html(str);
 		document.forms['upload_form'].elements['albumname'].value = str;
-		window.location = "#all";
+		window.location = "#addPhoto";
 	}
 
 </script>
@@ -386,7 +387,7 @@ function uploadButton() {
 function loginUser() {
    FB.login(function(response) {
    	if (response.authResponse) {
-   		window.location ="#one";}
+   		window.location ="#Home";}
    		else {
    			alert ("Your login attempt failed. Please double check your username and password and try again.")
    		}
@@ -496,11 +497,14 @@ function chooseFriends(friends) {
 
 	<div data-role="header">
 		<h1>My Albums</h1>
+		
+		<a href ="#popup" data-role="button" data-icon="plus" class="ui-btn-right" >New Album</a>
 		<!-- <a href="" data-role="button" class="ui-btn-left" rel="external">back</a> -->
 	</div>
 	
-	
 	<div data-role="content" >	
+
+
 		<!--	
 		<ul data-role="listview" data-inset="true">
 			<li><a href="#Albumgallery" onClick="populateGallery()">
@@ -605,5 +609,59 @@ function populateGallery(name) {
 		}(window, window.jQuery, window.Code.PhotoSwipe));
 		
 	</script>
+	
+	<div data-role="page" id="addPhoto" data-add-back-btn="true">
+
+	<!-- Header in PHP -->
+	<div data-role='header'>
+		<h1 id='albumHeader'></h1>
+	</div>
+	<div data-role="content">
+				
+				
+	<!--Camera access -->	
+		<div class="container">
+            
+            <div class="upload_form_cont">
+                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
+                    <div>
+                    	<input type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
+                    	<input type="text" name="albumname" id="albumname" style="display:none"/>
+                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();"   style="display:none"/></div>
+                    </div>
+
+                    <div id="fileinfo">
+                        <div id="filename"></div>
+                        <div id="filesize"></div>
+                        <div id="filetype"></div>
+                        <div id="filedim"></div>
+                    </div>
+                    <div id="error">You should select valid image files only!</div>
+                    <div id="error2">An error occurred while uploading the file</div>
+                    <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
+                    <div id="warnsize"></div>
+
+                    <div id="progress_info">
+                        <div id="progress"></div>
+                        <div id="progress_percent">&nbsp;</div>
+                        <div class="clear_both"></div>
+                        <div>
+                            <div id="speed">&nbsp;</div>
+                            <div id="remaining">&nbsp;</div>
+                            <div id="b_transfered">&nbsp;</div>
+                            <div class="clear_both"></div>
+                        </div>
+                        <div id="upload_response"></div>
+                    </div>
+                      <div>
+                        <input type="button" value="Upload" onclick="startUploading()"/>
+                    </div>
+                </form>
+                <img id="preview" />
+            </div> <!-- close upload_form_cont -->
+        </div>	
+		<!-- end camera access-->	
+	</div><!-- /content -->
+</div><!-- end Album page-->
 </body>
 </html>
