@@ -595,6 +595,12 @@ function populateGallery(name) {
                             <div id="b_transfered">&nbsp;</div>
                             <div class="clear_both"></div>
                         </div>
+                        <br>
+                        <br>
+                         <br>
+                        <br>
+                         <br>
+                        <br>
                         <div id="upload_response"></div>
                     </div>
                       <div>
@@ -608,7 +614,7 @@ function populateGallery(name) {
 	</div><!-- /content -->
 	<style>
 	input.picButton {
-    background-image: url(takephotobutton.png);  
+    background-image: url(camerabutton.png);  
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
