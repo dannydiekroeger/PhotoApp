@@ -8,3 +8,14 @@
 		#coffee .ui-icon { background:  url(glyphish-icons/100-coffee.png) 50% 50% no-repeat;  background-size: 20px 24px; }
 		#skull .ui-icon { background:  url(glyphish-icons/21-skull.png) 50% 50% no-repeat;  background-size: 22px 24px; }
 		
+
+input.picButton {
+    background-image: url(takephotobutton.jpg);  
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;        
+    height: 16px;
+    padding-left: 16px;    
+    vertical-align: middle; 
+}		

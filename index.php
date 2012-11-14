@@ -429,63 +429,7 @@ function chooseFriends(friends) {
 
 <!-- HERE is a page for the current album -->
 
-<!-- Album page-->
-<div data-role="page" id="all">
 
-	<!-- Header in PHP -->
-	<div data-role='header'>
-		<h1 id='albumHeader'></h1>
-	</div>
-	<div data-role="content">
-				
-				
-	<!--Camera access -->	
-		<div class="container">
-            
-            <div class="upload_form_cont">
-                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
-                    <div>
-                    	<input type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
-                    	<input type="text" name="albumname" id="albumname" style="display:none"/>
-                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();"   style="display:none"/></div>
-                    </div>
-
-                    <div id="fileinfo">
-                        <div id="filename"></div>
-                        <div id="filesize"></div>
-                        <div id="filetype"></div>
-                        <div id="filedim"></div>
-                    </div>
-                    <div id="error">You should select valid image files only!</div>
-                    <div id="error2">An error occurred while uploading the file</div>
-                    <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
-                    <div id="warnsize"></div>
-
-                    <div id="progress_info">
-                        <div id="progress"></div>
-                        <div id="progress_percent">&nbsp;</div>
-                        <div class="clear_both"></div>
-                        <div>
-                            <div id="speed">&nbsp;</div>
-                            <div id="remaining">&nbsp;</div>
-                            <div id="b_transfered">&nbsp;</div>
-                            <div class="clear_both"></div>
-                        </div>
-                        <div id="upload_response"></div>
-                    </div>
-                      <div>
-                        <input type="button" value="Upload" onclick="startUploading()"/>
-                    </div>
-                    <a href='#Albumgallery2' data-role='button' data-theme='d'>Album Gallery</a>
-           	<p><a href="#confirmAlbumLeave" data-role="button" data-theme="d" data-icon="delete" data-pos="right" data-rel="dialog">Stop Contributing to Album</a></p>
-                  
-                </form>
-                <img id="preview" />
-            </div> <!-- close upload_form_cont -->
-        </div>	
-		<!-- end camera access-->	
-	</div><!-- /content -->
-</div><!-- end Album page-->
 
 
 
@@ -625,7 +569,7 @@ function populateGallery(name) {
             <div class="upload_form_cont">
                 <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
                     <div>
-                    	<input type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
+                    	<input class="picButton" type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
                     	<input type="text" name="albumname" id="albumname" style="display:none"/>
                         <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();"   style="display:none"/></div>
                     </div>
@@ -662,6 +606,20 @@ function populateGallery(name) {
         </div>	
 		<!-- end camera access-->	
 	</div><!-- /content -->
+	<style>
+	input.picButton {
+    background-image: url(takephotobutton.png);  
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;        
+     height: 100px; 
+    
+    vertical-align: middle;
+    padding-bottom:10px; 
+}		
+	</style>
+	
 </div><!-- end Album page-->
 </body>
 </html>
