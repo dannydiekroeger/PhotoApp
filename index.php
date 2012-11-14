@@ -126,7 +126,7 @@
 <div data-role="page" id="Albumgallery" data-add-back-btn="true" class="gallery-page">
 	<div data-role="header" >
 		<h1 id="galleryHeader">Album Gallery</h1> 
-		<a href ="#addPhoto" data-role="button" data-icon="plus" class="ui-btn-right" >New Photo</a>
+		<a href ="createAlbum.php" data-role="button" data-icon="plus" class="ui-btn-right" >New Photo</a>
 	</div><!-- /header -->
 	<div data-role="content" id="galleryContent">
 		
@@ -268,6 +268,7 @@
 	<div data-role="content" data-theme="d">	
 		<h2>Create an Album</h2>
 		<!--Will need to change action to process data!! with method = post-->
+		<!-- took out action -->
 		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="createAlbum.php">
 			<label for="album">Album Name:</label>
 			<input type="text" name="album" id="album">
@@ -292,14 +293,9 @@
 	function createAlbum() {
 		var str = document.forms['createalbum_form']['album'].value;
 		
-		
-		
-		//var str = <?php echo $albumName; ?>;
-		//var str = '<h1><?php echo $albumName ?></h1>';
-		
 		$("#albumHeader").html(str);
 		document.forms['upload_form'].elements['albumname'].value = str;
-		window.location = "#addPhoto";
+		//window.location = "#addPhoto";
 	}
 
 </script>
@@ -365,23 +361,6 @@ window.fbAsyncInit = function() {
 <!-- Facebook scripts here -->
 
 <script type="text/javascript">
-function uploadButton() {
-	$('#image_file').trigger('click');
-	
-	var form = document.forms['upload_form'];
-	
-	<?php
-		include('config.php');
-		$countquery = 'SELECT * FROM Gallery';
-		$countresult = mysql_query($countquery);
-		$rows = mysql_num_rows($countresult) + 1;
-		
-	?>
-	
-	
-	
-	console.log(form);
-}
 
 
 function loginUser() {
@@ -554,78 +533,5 @@ function populateGallery(name) {
 		
 	</script>
 	
-	<div data-role="page" id="addPhoto" data-add-back-btn="true">
-
-	<!-- Header in PHP -->
-	<div data-role='header'>
-		<h1 id='albumHeader'></h1>
-	</div>
-	<div data-role="content">
-				
-				
-	<!--Camera access -->	
-		<div class="container">
-            
-            <div class="upload_form_cont">
-                <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
-                    <div>
-                    	<input class="picButton" type="button" value="Take or Upload a Pic!" onclick="uploadButton()" />
-                    	<input type="text" name="albumname" id="albumname" style="display:none"/>
-                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();"   style="display:none"/></div>
-                    </div>
-
-                    <div id="fileinfo">
-                        <div id="filename"></div>
-                        <div id="filesize"></div>
-                        <div id="filetype"></div>
-                        <div id="filedim"></div>
-                    </div>
-                    <div id="error">You should select valid image files only!</div>
-                    <div id="error2">An error occurred while uploading the file</div>
-                    <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
-                    <div id="warnsize"></div>
-
-                    <div id="progress_info">
-                        <div id="progress"></div>
-                        <div id="progress_percent">&nbsp;</div>
-                        <div class="clear_both"></div>
-                        <div>
-                            <div id="speed">&nbsp;</div>
-                            <div id="remaining">&nbsp;</div>
-                            <div id="b_transfered">&nbsp;</div>
-                            <div class="clear_both"></div>
-                        </div>
-                        <br>
-                        <br>
-                         <br>
-                        <br>
-                         <br>
-                        <br>
-                        <div id="upload_response"></div>
-                    </div>
-                      <div>
-                        <input type="button" value="Upload" onclick="startUploading()"/>
-                    </div>
-                </form>
-                <img id="preview" />
-            </div> <!-- close upload_form_cont -->
-        </div>	
-		<!-- end camera access-->	
-	</div><!-- /content -->
-	<style>
-	input.picButton {
-    background-image: url(camerabutton.png);  
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;        
-     height: 100px; 
-    
-    vertical-align: middle;
-    padding-bottom:10px; 
-}		
-	</style>
-	
-</div><!-- end Album page-->
-</body>
+	</body>
 </html>

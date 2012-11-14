@@ -104,6 +104,7 @@ input {
     font-size:14pt;
     padding:5px 10px;
 }
+
 input[type=button] {
     background: -moz-linear-gradient(#ffffff, #dfdfdf);
     background: -ms-linear-gradient(#ffffff, #dfdfdf);
@@ -114,6 +115,7 @@ input[type=button] {
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dfdfdf')";
     background: linear-gradient(#ffffff, #dfdfdf);
 }
+
 #image_file {
     width:400px;
 }
@@ -174,3 +176,4 @@ input[type=button] {
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb', endColorstr='#eee')";
     background: linear-gradient(#bbb, #eee);
 }
+		
