@@ -27,12 +27,14 @@
 	
 	<link href="css/main.css" rel="stylesheet" type="text/css" />
     <script src="js/script.js"></script>
-
+	<script src="uploadscript.js"></script>
 	
 </head> 
 <body>
 
 <div id="fb-root"></div>
+
+
 
 <div data-role="page" id="login">
 
@@ -96,15 +98,6 @@
 	
 </div><!-- /page one -->
 
-<!-- Start of second page: #two -->
-<div data-role="page" id="myAlbums" data-add-back-btn="true">
-
-	<div data-role="header">
-		<h1>My Albums</h1>
-	</div><!-- /header -->
-
-</div><!-- /page two -->
-
 
 <!-- Start of Help page-->
 <div data-role="page" id="Help" data-rel="dialog" >
@@ -122,36 +115,6 @@
 </div><!-- end Help-->
 
 
-<!-- Start of Album Gallery page-->
-<div data-role="page" id="Albumgallery" data-add-back-btn="true" class="gallery-page">
-	<div data-role="header" >
-		<h1 id="galleryHeader">Album Gallery</h1> 
-		<a href ="createAlbum.php" data-role="button" data-icon="plus" class="ui-btn-right" >New Photo</a>
-	</div><!-- /header -->
-	<div data-role="content" id="galleryContent">
-		
-		<ul class="gallery">
-
-      <?php
-			include('config.php');
-			$picquery = "SELECT * from Gallery";
-			$picresult = mysql_query($picquery);
-			while($bro = mysql_fetch_assoc($picresult)) {
-				$path = "uploads/".$bro['PhotoPath'];
-				echo "<li><a href='$path' rel='external'><img width='91' height='131' src='$path'/></a></li>";	
-			}
-		
-		?>	
-
-				
-			
-		</ul>
-		
-	
-	
-	</div><!-- /content -->
-
-</div><!-- end Album Gallery-->
 
 
 <!-- Start of Album Gallery page-->
@@ -282,13 +245,13 @@
 			took out type="submit"
 			-->
 			
-	        <input type="submit" data-theme="b" value="Create Album" onClick="createAlbum()">
+	        <input type="submit" data-theme="b" value="Create Album"/>
 			</form>	
 				
 		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
 	</div><!-- /content -->
 </div><!-- /page popup -->
-
+<!--
 <script>
 	function createAlbum() {
 		var str = document.forms['createalbum_form']['album'].value;
@@ -299,7 +262,7 @@
 	}
 
 </script>
-
+-->
 
 <!--Friends List Test start -->
 <div data-role="page" id="friendListTest" data-add-back-btn="true">
@@ -427,33 +390,6 @@ function chooseFriends(friends) {
 	
 	<div data-role="content" >	
 
-
-		<!--	
-		<ul data-role="listview" data-inset="true">
-			<li><a href="#Albumgallery" onClick="populateGallery()">
-					<?php
-		include("config.php");
-		$query = "select distinct AlbumName from Albums where Friends = 'Jamin'";
-		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)) {
-			echo "<p>".$row["AlbumName"]."</p>";	
-		}
-		?>
-			</a></li> 
-			<li><a href="#Albumgallery">
-			
-		<?php
-		include("config.php");
-		$query = "select AlbumName from Albums where Friends = 'Danny'";
-		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)) {
-			echo "<p>".$row["AlbumName"]."</p>";	
-		}
-		?>
-
-			</a></li> 
-		</ul> 
-		-->
 		<ul data-role="listview"  data-inset="true">
 		
 		<?php
@@ -465,10 +401,10 @@ function chooseFriends(friends) {
 			if($row["AlbumName"] != null) {
 				$current = $row["AlbumName"];
 			}
-			echo "<li><a href='#Albumgallery' onClick='populateGallery(\"$current\")'>".$row["AlbumName"]."</a></li>";	
+			echo "<li><a onClick='openGallery(\"$current\")'>".$row["AlbumName"]."</a></li>";	
 		}
 		?>
-		
+		<!-- href albumgallery -->
 		
 		</ul>
 		
@@ -478,8 +414,19 @@ function chooseFriends(friends) {
 </div>
 
 <script>
-function populateGallery(name) {
-	$('#galleryHeader').html(name);
+function openGallery(name) {
+	//$('#galleryHeader').html(name);
+	var myform = document.createElement("form");
+	myform.method = "post";
+	myform.action = "albumgallery.php";
+	myinput = document.createElement("input");
+	myinput.setAttribute("name", "album");
+	myinput.setAttribute("value", name);
+	myform.appendChild(myinput);
+	console.log("name is " + name);
+	document.body.appendChild(myform);
+	myform.submit();
+	
 	console.log("I am testing like a champ");
 
 }

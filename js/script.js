@@ -91,7 +91,7 @@ function startUploading() {
 
     // get form data for POSTing
     //var vFD = document.getElementById('upload_form').getFormData(); // for FF3
-    var vFD = new FormData(document.getElementById('upload_form')); 
+    var vFD = new FormData(document.getElementById('upload_f')); 
 
     // create XMLHttpRequest object, adding few event listeners, and POSTing our data
     var oXHR = new XMLHttpRequest();        

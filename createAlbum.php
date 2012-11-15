@@ -25,7 +25,7 @@
 	
 	<link href="css/main.css" rel="stylesheet" type="text/css" />
     <script src="js/script.js"></script>
-
+	<script src="uploadscript.js"></script>
 	
 </head> 
 <body>
@@ -36,13 +36,16 @@
 
 
 
+
 <div data-role="page" id="addPhoto" data-add-back-btn="true">
 
 	<!-- Header in PHP -->
 	<div data-role='header'>
+		<h1>
 		<?php
-			echo "<h1>".$_POST["album"]."</h1>";
+			echo $_POST["album"];
 		?>
+		</h1>
 	</div>
 	<div data-role="content">
 	
@@ -56,9 +59,9 @@
 		if($bro == "") {
 			$query = "INSERT INTO Albums VALUES ('$albumName', 'NULL','NULL', 'NULL')";
 			$result = mysql_query($query);
-			echo "<p> made a new album! </p>";
+			echo "<p> created new album </p>";
 		} else {
-			echo "<p> already exists! </p>";
+			echo "<p> album already exists! </p>";
 		}
 
 	?>			
@@ -70,8 +73,8 @@
                 <form id="upload_f" enctype="multipart/form-data" method="post" action="upload.php">
                     <div>
                     	<input class="picButton" type="button" value="Take or Upload a Pic!" onclick="uploadButton()"/>
-                    	<input type="text" name="albumname" id="albumname" style="display:none"/>
-                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();"   style="display:none"/></div>
+                    	<input type="text" name="albumname" id="albumname" style="display:none" value=<?php echo $albumName; ?>>
+                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();" style="display:none"/></div>
                     </div>
 
                     <div id="fileinfo">
@@ -124,25 +127,7 @@ input.picButton {
 }
 	</style>
 
-<script type="text/javascript">
-function uploadButton() {
-	$('#image_file').trigger('click');
-	
-	var form = document.forms['upload_f'];
-	
-	<?php
-		include('config.php');
-		$countquery = 'SELECT * FROM Gallery';
-		$countresult = mysql_query($countquery);
-		$rows = mysql_num_rows($countresult) + 1;
-		
-	?>
-	
-	
-	
-	console.log(form);
-}
-</script>
+
 
 </body>
 </html>
