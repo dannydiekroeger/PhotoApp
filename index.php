@@ -202,20 +202,15 @@
 		<h2>Create an Album</h2>
 		<!--Will need to change action to process data!! with method = post-->
 		<!-- took out action -->
-		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="albumgallery.php">
+		<form id="createalbum_form" enctype="multipart/form-data" method="post">
 			<label for="album">Album Name:</label>
 			<input type="text" name="album" id="album"/>
 			<p><a href="#friendListTest" data-role="button" data-icon="plus">Add Friends</a></p>
 			
 			<div id="numFriendsChosen"></div>
 			<div id="friendsChosen"></div>
-						<!--
-			<label for="friend">Add Friend:</label>
-			<input type="text" name="friend" id="friend">
-			took out type="submit"
-			-->
-			
-	        <input type="button" data-theme="b" value="Create Album" onclick="createalbum()"/>
+			<input type="button" data-theme="b" value="Create Album" onclick="createalbum()"/>
+
 			</form>	
 				
 		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
@@ -232,6 +227,7 @@ function createalbum() {
 	myinput.setAttribute("name", "myName");
 	myinput.setAttribute("value", localStorage.getItem("username"));
 	myform.appendChild(myinput);
+	console.log(myform);
 	myform.submit();
 	
 	
@@ -300,11 +296,10 @@ function chooseFriends() {
 		if($('#'+boxid).attr('checked')) {
 			var name = $("label[for="+boxid+"]").text();
 			console.log(name);
-			str = str + '<input type="text" name="friend'+i.toString()+'" value="'+name+'" />';
+			str = str + '<input type="text" name="friend'+numChosen.toString()+'" value="'+name+'" />';
 			numChosen = numChosen + 1;
 		}
 	}
-	
 	$("#friendsChosen").html(str);
 	$("#numFriendsChosen").html('<input type="text" name="numFriends" value="'+numChosen.toString()+'" />');
 	// should add these friends to the form

@@ -32,6 +32,9 @@
 <script>
 	function road() {
 		console.log("road username is: " + localStorage.getItem('username'));
+		console.log('<?php echo $_POST["friend0"];?>');
+		console.log('<?php echo $_POST["friend1"];?>');
+		console.log('<?php echo $_POST["friend2"];?>');
 	}
 </script>
 
@@ -68,11 +71,12 @@
 			$myr = mysql_query($myq);
 			
 			$numFriends = $_POST["numFriends"];
-			
+			echo "numFriends is ".$numFriends;
 			for($i=0; $i<$numFriends; $i++) {
 				$istring = "$i";
 				$idname = "friend".$istring;
 				$name = $_POST[$idname];
+				echo "<p>".$name."</p>";
 				$friendq = "insert into Album values('$albumName', '$name')";
 				$friendr = mysql_query($friendq);
 			}
