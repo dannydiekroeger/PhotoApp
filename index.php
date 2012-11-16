@@ -29,34 +29,60 @@
     <script src="js/script.js"></script>
 	<script src="uploadscript.js"></script>
 	
+	<script>
+		function load() {
+			console.log("name is " + localStorage.getItem('username'));
+			//console.log(localStorage.getItem('friends'));
+			//console.log("friendlist: " + localStorage.getItem('friends'));
+			$(".friendList").html(localStorage.getItem('friends'));
+			$(".numFriends").html(localStorage.getItem('numFriends'));
+		}
+	</script>
 </head> 
-<body>
+<body onload="load()";>
+
+
+
 
 <div id="fb-root"></div>
 
 
 
-<div data-role="page" id="login">
+<div data-role="page" id="Home" data-add-back-btn="true">
 
 	<div data-role="header">
-		<h1>Facebook Login</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">	
-	<p><img src="images/mix.png" width="285" height="255"></p>
-	<div class="container">
-		<div class="loginform_cont">
-			<form id="login_form" enctype="multipart/form-data" method="post"><!-- action="#one"> -->
-				<input type="button" value="log in or continue (if logged in)" onclick="loginUser()" />
-			</form>
-		</div>
-	</div>	
+		<h1>My Albums</h1>
+		
+		<a href ="#popup" data-role="button" data-icon="plus" class="ui-btn-right" >New Album</a>
+		<!-- <a href="" data-role="button" class="ui-btn-left" rel="external">back</a> -->
+	</div>
 	
-	</div> <!-- end content -->
+	<div data-role="content" >	
+
+		<ul data-role="listview"  data-inset="true">
+		
+		<?php
+		include("config.php");
+		$user = $_POST["username"];
+		$query = "select distinct * from Album where UserName like '%$user%'";
+		$result = mysql_query($query);
+		while($row = mysql_fetch_assoc($result)) {
+			$current = '';
+			if($row["AlbumName"] != null) {
+				$current = $row["AlbumName"];
+			}
+			echo "<li><a onClick='openGallery(\"$current\")'>".$row["AlbumName"]."</a></li>";	
+		}
+		?>
+		<!-- href albumgallery -->
+		
+		</ul>
+		
+	</div>
 
 
 </div>
-<!-- end of login page -->
+
 
 
 
@@ -76,27 +102,6 @@
 </script>
 
 
-<!-- Start of first page: #one -->
-<div data-role="page" id="one">
-	<div data-role="header">
-		<h1>Trail Mix</h1>
-<a href="#Help" data-role="button" class="ui-btn-right" data-rel="dialog">?</a>	
-	</div><!-- /header -->
-
-	<div data-role="content">	
-
-		<div id="user-info"></div>
-		<p><a href="#popup" data-role="button" data-icon="plus" data-iconpos="bottom" button-color="red">Create an Album</a></p>
-		<br/><br/><br/><br/>
-		<p><a href="#Home" data-role="button">My Albums</a></p>
-		<!--<p><a href="#settings" data-role="button">Settings</a></p>-->
-		<p><a href="#invitations" data-role="button">Album Invitations</a></p>			
-<!--		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
-	</div><!-- /content --> 
-	
-</div>
-	
-</div><!-- /page one -->
 
 
 <!-- Start of Help page-->
@@ -113,41 +118,6 @@
 	
 
 </div><!-- end Help-->
-
-
-
-
-<!-- Start of Album Gallery page-->
-<div data-role="page" id="Albumgallery2" class="gallery-page">
-	<div data-role="header" >
-		<h1 id="galleryHeader">Album Gallery</h1> 
-		<a href ="#addPhoto" data-role="button" data-icon="arrow-l" class="ui-btn-left" >Back</a>
-	</div><!-- /header -->
-	<div data-role="content" id="galleryContent">
-		
-		<ul class="gallery">
-
-      <?php
-			include('config.php');
-			$picquery = "SELECT * from Gallery";
-			$picresult = mysql_query($picquery);
-			while($bro = mysql_fetch_assoc($picresult)) {
-				$path = "uploads/".$bro['PhotoPath'];
-				echo "<li><a href='$path' rel='external'><img width='91' height='131' src='$path'/></a></li>";	
-			}
-		
-		?>	
-
-				
-			
-		</ul>
-		
-	
-	
-	</div><!-- /content -->
-
-</div><!-- end Album Gallery-->
-
 
 <!-- confirm event leaving popup-->
 <div data-role="page" id="confirmAlbumLeave">
@@ -232,25 +202,43 @@
 		<h2>Create an Album</h2>
 		<!--Will need to change action to process data!! with method = post-->
 		<!-- took out action -->
-		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="createAlbum.php">
+		<form id="createalbum_form" enctype="multipart/form-data" method="post" action="albumgallery.php">
 			<label for="album">Album Name:</label>
-			<input type="text" name="album" id="album">
+			<input type="text" name="album" id="album"/>
 			<p><a href="#friendListTest" data-role="button" data-icon="plus">Add Friends</a></p>
 			
+			<div id="numFriendsChosen"></div>
 			<div id="friendsChosen"></div>
-			
-			<!--
+						<!--
 			<label for="friend">Add Friend:</label>
 			<input type="text" name="friend" id="friend">
 			took out type="submit"
 			-->
 			
-	        <input type="submit" data-theme="b" value="Create Album"/>
+	        <input type="button" data-theme="b" value="Create Album" onclick="createalbum()"/>
 			</form>	
 				
 		<!--<a href="#Album" data-role="button" data-theme="b">Create Album</a>	-->
 	</div><!-- /content -->
 </div><!-- /page popup -->
+
+<script>
+function createalbum() {
+	//$('#galleryHeader').html(name);
+	console.log("I am testing like a champ");
+	var myform = document.forms['createalbum_form'];
+	myform.action = "albumgallery.php";
+	myinput = document.createElement("input");
+	myinput.setAttribute("name", "myName");
+	myinput.setAttribute("value", localStorage.getItem("username"));
+	myform.appendChild(myinput);
+	myform.submit();
+	
+	
+
+}
+</script>
+
 <!--
 <script>
 	function createAlbum() {
@@ -272,15 +260,9 @@
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">
-	<p class="friend"></p>
-	
-	<div id="fb-root"></div>
-		
-<div data-role="fieldcontain" class='friendList'>
-
-</div>
- <input type="submit" data-theme="b" value="Done" onClick="chooseFriends(this.form)">
-
+		<p class="numFriends"></p>
+		<div data-role="fieldcontain" class='friendList'> </div>
+		<input type="button" data-theme="b" value="Done" onClick="chooseFriends()">
 
 	</div><!-- /content -->
 
@@ -297,28 +279,8 @@
           e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
           document.getElementById('fb-root').appendChild(e);
           }());
-  </script>
-	<script>
-window.fbAsyncInit = function() {
-      FB.init({ appId: '448021921920652', 
-      status: true, 
-      cookie: true,
-      xfbml: true,
-      oauth: true});
-
-    FB.Event.subscribe('auth.statusChange', handleStatusChange);	
-};
-	</script>
-	<script>
-	function handleStatusChange(response) {
-     document.body.className = response.authResponse ? 'connected' : 'not_connected';
-    
-     if (response.authResponse) {
-       console.log(response);
-       updateUserInfo(response);
-     }
-}
 </script>
+
 
 
 <!-- Facebook scripts here -->
@@ -326,43 +288,26 @@ window.fbAsyncInit = function() {
 <script type="text/javascript">
 
 
-function loginUser() {
-   FB.login(function(response) {
-   	if (response.authResponse) {
-   		window.location ="#Home";}
-   		else {
-   			alert ("Your login attempt failed. Please double check your username and password and try again.")
-   		}
-   			
-   	 }, {scope:'email'});
-   	       var apiQuery = {
-   method: 'fql.query',
-   query: 'SELECT uid, name FROM user WHERE uid IN (SELECT uid1 FROM friend WHERE uid2 = me() ) AND is_app_user'
-};  
-	console.log("here");
-	FB.api(apiQuery, function(response) { 
-		console.log(response)
-		var friendString = '';
-		for(var i = 0; i<response.length; i++) {
-			friendString += '<fieldset data-role="controlgroup"> <input type="checkbox" name=checkbox-'+i.toString()+'" id="checkbox-' + i.toString() + '" class="custom" /> <label for="checkbox-' + i.toString() + '">' + response[i].name + '</label> </fieldset>';
+
+
+function chooseFriends() {
+	var numtext = $(".numFriends").text();
+	var num = parseInt(numtext);
+	var numChosen=0;
+	var str = '';
+	for(var i = 0; i < num; i++) {
+		var boxid = 'checkbox-' + i.toString();
+		if($('#'+boxid).attr('checked')) {
+			var name = $("label[for="+boxid+"]").text();
+			console.log(name);
+			str = str + '<input type="text" name="friend'+i.toString()+'" value="'+name+'" />';
+			numChosen = numChosen + 1;
 		}
-		$(".friendList").html(friendString);
-    		
-	 });  	
- }
- 
-
-
-
-    function updateUserInfo(response) {
-      FB.api('/me', function(response) {
-        document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
-        console.log(response);
-      });
-      
-    }
-
-function chooseFriends(friends) {
+	}
+	
+	$("#friendsChosen").html(str);
+	$("#numFriendsChosen").html('<input type="text" name="numFriends" value="'+numChosen.toString()+'" />');
+	// should add these friends to the form
 	//document.getElementById("friendsChosen").innerHtml = friends.elements[0];
 	window.location ="#popup";
 }
@@ -379,39 +324,6 @@ function chooseFriends(friends) {
 
 <!-- EVERYTHING BELOW HERE IS FOR THE MYalbum and Galleries -->
 
-<div data-role="page" id="Home" data-add-back-btn="true">
-
-	<div data-role="header">
-		<h1>My Albums</h1>
-		
-		<a href ="#popup" data-role="button" data-icon="plus" class="ui-btn-right" >New Album</a>
-		<!-- <a href="" data-role="button" class="ui-btn-left" rel="external">back</a> -->
-	</div>
-	
-	<div data-role="content" >	
-
-		<ul data-role="listview"  data-inset="true">
-		
-		<?php
-		include("config.php");
-		$query = "select * from Albums";
-		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)) {
-			$current = 'no name';
-			if($row["AlbumName"] != null) {
-				$current = $row["AlbumName"];
-			}
-			echo "<li><a onClick='openGallery(\"$current\")'>".$row["AlbumName"]."</a></li>";	
-		}
-		?>
-		<!-- href albumgallery -->
-		
-		</ul>
-		
-	</div>
-
-
-</div>
 
 <script>
 function openGallery(name) {
@@ -430,6 +342,9 @@ function openGallery(name) {
 	console.log("I am testing like a champ");
 
 }
+function gohome() {
+		window.location = "index.php#Home";
+}
 </script>
 
 
@@ -443,7 +358,7 @@ function openGallery(name) {
 		 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
 		 * If you don't this will mess with how jQuery Mobile works
 		 */
-		
+		/*
 		(function(window, $, PhotoSwipe){
 			
 			$(document).ready(function(){
@@ -477,8 +392,7 @@ function openGallery(name) {
 			});
 		
 		}(window, window.jQuery, window.Code.PhotoSwipe));
-		
+		*/
 	</script>
-	
 	</body>
 </html>
