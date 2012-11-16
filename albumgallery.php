@@ -106,6 +106,7 @@
 </div><!-- end Album Gallery-->
 
 <script>
+
 //return to updated version of album gallery while conserving post data
 	function backdata() {
 	var myform = document.createElement("form");
@@ -136,7 +137,7 @@
             <form id="upload_f" enctype="multipart/form-data" method="post" action="upload.php">
              <div>
              <input type="text" name="albumname" id="albumname" style="display:none" value=<?php echo $albumName; ?>>
-             <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();" style="display:none"/></div>
+             <div><input type="file" name="image_file" id="image_file" onchange="openPopup()" style="display:none"/></div>
               </div>
                     <div id="fileinfo">
                         <div id="filename"></div>
@@ -196,10 +197,11 @@
 		console.log("i clicked the button");
 		var form = document.forms['upload_f'];
 		console.log(form);
-		openPopup();
+		//openPopup();
 	};
 	function openPopup() {
 		window.location = "#popupload";
+		fileSelected();
 	}
 </script>
 	<script type="text/javascript">
@@ -209,7 +211,7 @@
 		 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
 		 * If you don't this will mess with how jQuery Mobile works
 		 */
-		/*
+		
 		(function(window, $, PhotoSwipe){
 			
 			$(document).ready(function(){
@@ -243,7 +245,7 @@
 			});
 		
 		}(window, window.jQuery, window.Code.PhotoSwipe));
-		*/
+		
 	</script>
 </body>
 </html>

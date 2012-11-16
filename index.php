@@ -53,7 +53,7 @@
 	<div data-role="header">
 		<h1>My Albums</h1>
 		
-		<a href ="#popup" data-role="button" data-icon="plus" class="ui-btn-right" >New Album</a>
+		<a href ="#popup" data-role="button" data-icon="plus" class="ui-btn-right" >Album</a>
 		<!-- <a href="" data-role="button" class="ui-btn-left" rel="external">back</a> -->
 	</div>
 	
@@ -66,12 +66,17 @@
 		$user = $_POST["username"];
 		$query = "select distinct * from Album where UserName like '%$user%'";
 		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)) {
+		$row = mysql_fetch_assoc($result);
+		if($row == NULL) {
+			echo "Add your first album ------^";
+		}
+		while($row) {
 			$current = '';
 			if($row["AlbumName"] != null) {
 				$current = $row["AlbumName"];
 			}
-			echo "<li><a onClick='openGallery(\"$current\")'>".$row["AlbumName"]."</a></li>";	
+			echo "<li><a onClick='openGallery(\"$current\")'>".$row["AlbumName"]."</a></li>";
+			$row = mysql_fetch_assoc($result);	
 		}
 		?>
 		<!-- href albumgallery -->
