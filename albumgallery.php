@@ -61,7 +61,6 @@
 		$checkq = "select distinct * from Album where AlbumName ='$albumName'";
 		$checkresult = mysql_query($checkq);
 		$bro = mysql_fetch_assoc($checkresult);
-		echo "<p>".$bro['AlbumName']."</p>";
 		if($bro == "" and $albumName != "") {
 			$query = "INSERT INTO Albums VALUES ('$albumName', 'NULL','NULL', 'NULL')";
 			$result = mysql_query($query);
@@ -71,12 +70,10 @@
 			$myr = mysql_query($myq);
 			
 			$numFriends = $_POST["numFriends"];
-			echo "numFriends is ".$numFriends;
 			for($i=0; $i<$numFriends; $i++) {
 				$istring = "$i";
 				$idname = "friend".$istring;
 				$name = $_POST[$idname];
-				echo "<p>".$name."</p>";
 				$friendq = "insert into Album values('$albumName', '$name')";
 				$friendr = mysql_query($friendq);
 			}
