@@ -5,6 +5,7 @@
 <!-- cboskii baby!! Jamin-->
 
 <head>
+<script src="//cdn.optimizely.com/js/141863837.js"></script>
 	<title>Trail Mix</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">

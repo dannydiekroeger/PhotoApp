@@ -3,6 +3,7 @@
 <!-- cboskii baby!! Jamin-->
 
 <head>
+<script src="//cdn.optimizely.com/js/141863837.js"></script>
 	<title>Trail Mix</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -90,9 +91,14 @@
 			$albumName = $_POST["album"];
 			$picquery = "SELECT * from Gallery where AlbumName = '$albumName'";
 			$picresult = mysql_query($picquery);
-			while($bro = mysql_fetch_assoc($picresult)) {
+			$bro = mysql_fetch_assoc($picresult);
+			if($bro == NULL) {
+				echo "<img src='nophotosreminderup.png'></img>";
+			}
+			while($bro) {
 				$path = "uploads/".$bro['PhotoPath'];
-				echo "<li><a href='$path' rel='external'><img width='91' height='131' src='$path'/></a></li>";	
+				echo "<li><a href='$path' rel='external'><img width='91' height='131' src='$path'/></a></li>";
+				 $bro = mysql_fetch_assoc($picresult);	
 			}
 		
 		?>	
@@ -104,6 +110,16 @@
 	</div><!-- /content -->
 
 </div><!-- end Album Gallery-->
+
+<style>
+
+img.centerbutton {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+</style>
 
 <script>
 
@@ -173,7 +189,6 @@
 		<input type="button" value="Upload" onclick="startUploading()"/>
 	</div><!-- /content -->
 </div><!-- /page popup -->
-
 
 
 <script type="text/javascript">
@@ -247,6 +262,9 @@
 		}(window, window.jQuery, window.Code.PhotoSwipe));
 		
 	</script>
+	
+
+
 </body>
 </html>
 
