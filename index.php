@@ -36,7 +36,7 @@
 			//console.log(localStorage.getItem('friends'));
 			//console.log("friendlist: " + localStorage.getItem('friends'));
 			$(".friendList").html(localStorage.getItem('friends'));
-			$(".numFriends").html(localStorage.getItem('numFriends'));
+			//$(".numFriends").html(localStorage.getItem('numFriends'));
 		}
 	</script>
 	
@@ -257,8 +257,9 @@ function createalbum() {
 
 	<div data-role="content" data-theme="d">
 		<p class="numFriends"></p>
-		<div data-role="fieldcontain" class='friendList'> </div>
 		<input type="button" data-theme="b" value="Done" onClick="chooseFriends()">
+		<div data-role="fieldcontain" class='friendList'> </div>
+		
 
 	</div><!-- /content -->
 

@@ -166,11 +166,12 @@ img.centerbutton {
 	<div data-role="header" data-theme="a" data-add-back-btn="true">
 			<div onclick="backdata()"data-role="button" data-icon="arrow-l" class="ui-btn-left" >Back</div>
 
-		<h1>Upload a Photo</h1>
+		<h1>Uploading...</h1>
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="d">
-	<!--Camera access -->	
+	<!--Camera access -->
+		<h1>Please wait...</h1>	
 		<div class="container">
             <form id="upload_f" enctype="multipart/form-data" method="post" action="upload.php">
              <div>
@@ -207,8 +208,9 @@ img.centerbutton {
                 
              <!-- close upload_form_cont -->
         </div>
-		<!-- end camera access-->
+		<!-- end camera access
 		<input type="button" value="Upload" onclick="startUploading()"/>
+		-->
 	</div><!-- /content -->
 </div><!-- /page popup -->
 
@@ -311,11 +313,15 @@ function fileSelected() {
 
             // we are going to display some custom image information here
             sResultFileSize = bytesToSize(oFile.size);
+            startUploading();
+            /*
             document.getElementById('fileinfo').style.display = 'block';
-            document.getElementById('filename').innerHTML = 'Name: ' + oFile.name;
+            document.getElementById('filename').innerHTML = 'Loading...';
+            
             document.getElementById('filesize').innerHTML = 'Size: ' + sResultFileSize;
             document.getElementById('filetype').innerHTML = 'Type: ' + oFile.type;
             document.getElementById('filedim').innerHTML = 'Dimension: ' + oImage.naturalWidth + ' x ' + oImage.naturalHeight;
+            */
         };
     };
 
@@ -413,6 +419,8 @@ function uploadFinish(e) { // upload successfully finished
     document.getElementById('remaining').innerHTML = '| 00:00:00';
 
     clearInterval(oTimer);
+    
+    backdata();
 }
 
 function uploadError(e) { // upload error

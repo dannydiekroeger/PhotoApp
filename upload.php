@@ -25,11 +25,8 @@ $result = mysql_query($addquery);
 if (move_uploaded_file($_FILES['image_file']['tmp_name'], 'uploads/'.$rows.'.jpg')) {
 
 	echo <<<EOF
-<p>Danny's iphone was here again. Be afraid </p>
-<p>Your file: {$sFileName} has been successsfully received.</p>
-<p>Added to album: {$albumName}</p>
-<p>Type: {$sFileType}</p>
-<p>Size: {$sFileSize}</p>
+<p>Upload Succesful.</p>
+
 EOF;
 
 }
