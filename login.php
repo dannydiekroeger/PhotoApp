@@ -29,8 +29,24 @@
 	<link href="css/main.css" rel="stylesheet" type="text/css" />
     <script src="script.js"></script>
 	<script src="uploadscript.js"></script>
-	
-</head> 
+<style type="text/css">
+body {
+    background: url(images/background.png);
+    background-repeat:repeat-y;
+    background-position:center center;
+    background-attachment:scroll;
+    background-size:100% 100%;
+}
+.ui-page {
+    background: transparent;
+}
+.ui-content{
+    background: transparent;
+}
+</style>
+</head>
+
+ 
 <body>
 
 <div id="fb-root"></div>
@@ -44,12 +60,14 @@
 	</div><!-- /header -->
 
 	<div data-role="content">	
-	<p><img src="images/mix.png" width="285" height="255"></p>
+	<!--<p><img src="images/mix.png" width="285" height="255"></p>-->
+	
 	<div class="container">
 		<div class="loginform_cont">
 			<form id="login_form" enctype="multipart/form-data" method="post">
 				<div id="usernameid"></div>
-				<input type="button" value="log in or continue (if logged in)" onclick="login()" />
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<input type="button" data-inline="true" value="log in or continue" onclick="login()"/>
 			</form>
 		</div>
 	</div>	
@@ -63,7 +81,11 @@
 <script>
 function login() {
 	//$('#galleryHeader').html(name);
-	loginUser();
+	if(localStorage.getItem("username")) {
+		continueLogin();
+	} else {
+		loginUser();
+	}
 }
 
 function continueLogin() {
@@ -73,6 +95,7 @@ function continueLogin() {
 	myinput = document.createElement("input");
 	myinput.setAttribute("name", "username");
 	myinput.setAttribute("value", localStorage.getItem('username'));
+	myinput.setAttribute("style", "display:none");
 	myform.appendChild(myinput);
 	document.body.appendChild(myform);
 	myform.submit();
