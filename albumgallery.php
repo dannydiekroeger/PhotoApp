@@ -1,9 +1,10 @@
+
+
 <!DOCTYPE html> 
 <html>
 <!-- cboskii baby!! Jamin-->
 
 <head>
-<script src="//cdn.optimizely.com/js/141863837.js"></script>
 	<title>Trail Mix</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -25,17 +26,38 @@
 	<link href="3.0.5/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
 	
 	<link href="css/main.css" rel="stylesheet" type="text/css" />
-    <script src="js/script.js"></script>
-	<script src="uploadscript.js"></script>
+	
+	<script type="text/javascript">
+		
+		/*
+		 * IMPORTANT!!!
+		 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
+		 * If you don't this will mess with how jQuery Mobile works
+		 */
+			
+		(function(window, $, PhotoSwipe){
+			localStorage.setItem('ps', PhotoSwipe);
+			console.log('here 1');
+			$(document).ready(function(e){
+				console.log('here2');
+						var 
+							currentPage = $(e.target),
+							options = {},
+							photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
+						console.log("photoswiping");	
+						return true;
+						
+			});
+		
+		}(window, window.jQuery, window.Code.PhotoSwipe));
+		
+	</script>
 	
 </head> 
 
 <script>
 	function road() {
-		console.log("road username is: " + localStorage.getItem('username'));
-		console.log('<?php echo $_POST["friend0"];?>');
-		console.log('<?php echo $_POST["friend1"];?>');
-		console.log('<?php echo $_POST["friend2"];?>');
+		console.log("Username is: " + localStorage.getItem('username'));
 	}
 </script>
 
@@ -45,7 +67,7 @@
 
 
 <!-- Start of Album Gallery page-->
-<div data-role="page" id="Albumgallery" data-add-back-btn="true" class="gallery-page" rel="external">
+<div data-role="page" id="Albumgallery" data-add-back-btn="true" class="gallery-page">
 	<div data-role="header" >
 		<?php
 			$albumName = $_POST["album"];
@@ -97,7 +119,7 @@
 			}
 			while($bro) {
 				$path = "uploads/".$bro['PhotoPath'];
-				echo "<li><a href='$path' rel='external'><img width='91' height='131' src='$path'/></a></li>";
+				echo '<li><a href="'.$path.'" rel="external"><img width="91" height="131" src="'.$path.'" alt="'.$path.'"/></a></li>';
 				 $bro = mysql_fetch_assoc($picresult);	
 			}
 		
@@ -152,7 +174,7 @@ img.centerbutton {
 		<div class="container">
             <form id="upload_f" enctype="multipart/form-data" method="post" action="upload.php">
              <div>
-             <input type="text" name="albumname" id="albumname" style="display:none" value=<?php echo $albumName; ?>>
+             <input type="text" name="albumname" id="albumname" style="display:none" value=<?php echo '"'.$albumName.'"'; ?>>
              <div><input type="file" name="image_file" id="image_file" onchange="openPopup()" style="display:none"/></div>
               </div>
                     <div id="fileinfo">
@@ -215,54 +237,194 @@ img.centerbutton {
 		//openPopup();
 	};
 	function openPopup() {
-		window.location = "#popupload";
 		fileSelected();
+		
+		window.location = "#popupload";
 	}
 </script>
-	<script type="text/javascript">
 		
-		/*
-		 * IMPORTANT!!!
-		 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
-		 * If you don't this will mess with how jQuery Mobile works
-		 */
-		
-		(function(window, $, PhotoSwipe){
-			
-			$(document).ready(function(){
-				
-				$('div.gallery-page')
-					.live('pageshow', function(e){
-						
-						var 
-							currentPage = $(e.target),
-							options = {},
-							photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
-							
-						return true;
-						
-					})
-					
-					.live('pagehide', function(e){
-						
-						var 
-							currentPage = $(e.target),
-							photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
 
-						if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
-							PhotoSwipe.detatch(photoSwipeInstance);
-						}
-						
-						return true;
-						
-					});
-				
-			});
-		
-		}(window, window.jQuery, window.Code.PhotoSwipe));
-		
-	</script>
-	
+<script>
+// common variables
+var iBytesUploaded = 0;
+var iBytesTotal = 0;
+var iPreviousBytesLoaded = 0;
+var iMaxFilesize = 10485760; // 10MBish
+var oTimer = 0;
+var sResultFileSize = '';
+
+function secondsToTime(secs) { // we will use this function to convert seconds in normal time format
+    var hr = Math.floor(secs / 3600);
+    var min = Math.floor((secs - (hr * 3600))/60);
+    var sec = Math.floor(secs - (hr * 3600) -  (min * 60));
+
+    if (hr < 10) {hr = "0" + hr; }
+    if (min < 10) {min = "0" + min;}
+    if (sec < 10) {sec = "0" + sec;}
+    if (hr) {hr = "00";}
+    return hr + ':' + min + ':' + sec;
+};
+
+function bytesToSize(bytes) {
+    var sizes = ['Bytes', 'KB', 'MB'];
+    if (bytes == 0) return 'n/a';
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+};
+
+function fileSelected() {
+
+    // hide different warnings
+    document.getElementById('upload_response').style.display = 'none';
+    document.getElementById('error').style.display = 'none';
+    document.getElementById('error2').style.display = 'none';
+    document.getElementById('abort').style.display = 'none';
+    document.getElementById('warnsize').style.display = 'none';
+
+    // get selected file element
+    var oFile = document.getElementById('image_file').files[0];
+
+    // filter for image files
+    var rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
+    if (! rFilter.test(oFile.type)) {
+        document.getElementById('error').style.display = 'block';
+        return;
+    }
+
+    // little test for filesize
+    if (oFile.size > iMaxFilesize) {
+        document.getElementById('warnsize').style.display = 'block';
+        return;
+    }
+
+    // get preview element
+    var oImage = document.getElementById('preview');
+
+    // prepare HTML5 FileReader
+    var oReader = new FileReader();
+        oReader.onload = function(e){
+
+        // e.target.result contains the DataURL which we will use as a source of the image
+        oImage.src = e.target.result;
+
+        oImage.onload = function () { // binding onload event
+
+            // we are going to display some custom image information here
+            sResultFileSize = bytesToSize(oFile.size);
+            document.getElementById('fileinfo').style.display = 'block';
+            document.getElementById('filename').innerHTML = 'Name: ' + oFile.name;
+            document.getElementById('filesize').innerHTML = 'Size: ' + sResultFileSize;
+            document.getElementById('filetype').innerHTML = 'Type: ' + oFile.type;
+            document.getElementById('filedim').innerHTML = 'Dimension: ' + oImage.naturalWidth + ' x ' + oImage.naturalHeight;
+        };
+    };
+
+    // read selected file as DataURL
+    oReader.readAsDataURL(oFile);
+    
+}
+
+function startUploading() {
+    // cleanup all temp states
+    iPreviousBytesLoaded = 0;
+    document.getElementById('upload_response').style.display = 'none';
+    document.getElementById('error').style.display = 'none';
+    document.getElementById('error2').style.display = 'none';
+    document.getElementById('abort').style.display = 'none';
+    document.getElementById('warnsize').style.display = 'none';
+    document.getElementById('progress_percent').innerHTML = '';
+    var oProgress = document.getElementById('progress');
+    oProgress.style.display = 'block';
+    oProgress.style.width = '0px';
+
+    // get form data for POSTing
+    //var vFD = document.getElementById('upload_f').getFormData(); // for FF3
+    var vFD = new FormData(document.getElementById('upload_f')); 
+
+    // create XMLHttpRequest object, adding few event listeners, and POSTing our data
+    var oXHR = new XMLHttpRequest();        
+    oXHR.upload.addEventListener('progress', uploadProgress, false);
+    oXHR.addEventListener('load', uploadFinish, false);
+    oXHR.addEventListener('error', uploadError, false);
+    oXHR.addEventListener('abort', uploadAbort, false);
+    
+    var url = 'upload.php';
+    
+    oXHR.open('POST', url += ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime(), false);
+    oXHR.send(vFD);
+
+    // set inner timer
+    oTimer = setInterval(doInnerUpdates, 300);
+}
+
+function doInnerUpdates() { // we will use this function to display upload speed
+    var iCB = iBytesUploaded;
+    var iDiff = iCB - iPreviousBytesLoaded;
+
+    // if nothing new loaded - exit
+    if (iDiff == 0)
+        return;
+
+    iPreviousBytesLoaded = iCB;
+    iDiff = iDiff * 2;
+    var iBytesRem = iBytesTotal - iPreviousBytesLoaded;
+    var secondsRemaining = iBytesRem / iDiff;
+
+    // update speed info
+    var iSpeed = iDiff.toString() + 'B/s';
+    if (iDiff > 1024 * 1024) {
+        iSpeed = (Math.round(iDiff * 100/(1024*1024))/100).toString() + 'MB/s';
+    } else if (iDiff > 1024) {
+        iSpeed =  (Math.round(iDiff * 100/1024)/100).toString() + 'KB/s';
+    }
+
+    document.getElementById('speed').innerHTML = iSpeed;
+    document.getElementById('remaining').innerHTML = '| ' + secondsToTime(secondsRemaining);        
+}
+
+function uploadProgress(e) { // upload process in progress
+    if (e.lengthComputable) {
+        iBytesUploaded = e.loaded;
+        iBytesTotal = e.total;
+        var iPercentComplete = Math.round(e.loaded * 100 / e.total);
+        var iBytesTransfered = bytesToSize(iBytesUploaded);
+
+        document.getElementById('progress_percent').innerHTML = iPercentComplete.toString() + '%';
+        document.getElementById('progress').style.width = (iPercentComplete * 4).toString() + 'px';
+        document.getElementById('b_transfered').innerHTML = iBytesTransfered;
+        if (iPercentComplete == 100) {
+            var oUploadResponse = document.getElementById('upload_response');
+            oUploadResponse.innerHTML = '<h1>Please wait...processing</h1>';
+            oUploadResponse.style.display = 'block';
+        }
+    } else {
+        document.getElementById('progress').innerHTML = 'unable to compute';
+    }
+}
+
+function uploadFinish(e) { // upload successfully finished
+    var oUploadResponse = document.getElementById('upload_response');
+    oUploadResponse.innerHTML = e.target.responseText;
+    oUploadResponse.style.display = 'block';
+
+    document.getElementById('progress_percent').innerHTML = '100%';
+    document.getElementById('progress').style.width = '400px';
+    document.getElementById('filesize').innerHTML = sResultFileSize;
+    document.getElementById('remaining').innerHTML = '| 00:00:00';
+
+    clearInterval(oTimer);
+}
+
+function uploadError(e) { // upload error
+    document.getElementById('error2').style.display = 'block';
+    clearInterval(oTimer);
+}  
+
+function uploadAbort(e) { // upload abort
+    document.getElementById('abort').style.display = 'block';
+    clearInterval(oTimer);
+}
+</script>
 
 
 </body>

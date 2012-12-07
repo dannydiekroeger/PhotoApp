@@ -25,8 +25,9 @@
 		 */
 		
 		(function(window, $, PhotoSwipe){
-			
+			console.log("I am here");
 			$(document).ready(function(){
+				console.log('here 2');
 				
 				$('div.gallery-page')
 					.live('pageshow', function(e){
@@ -41,7 +42,7 @@
 					})
 					
 					.live('pagehide', function(e){
-						
+					console.log('here3');	
 						var 
 							currentPage = $(e.target),
 							photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));

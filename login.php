@@ -5,14 +5,14 @@
 <!-- cboskii baby!! Jamin-->
 
 <head>
-<script src="//cdn.optimizely.com/js/141863837.js"></script>
+
 	<title>Trail Mix</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no"> 
 
-	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
+	#<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 
 	<link href="3.0.5/photoswipe.css" type="text/css" rel="stylesheet" />
 
@@ -27,7 +27,7 @@
 	<link href="3.0.5/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
 	
 	<link href="css/main.css" rel="stylesheet" type="text/css" />
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 	<script src="uploadscript.js"></script>
 	
 </head> 
@@ -63,10 +63,7 @@
 <script>
 function login() {
 	//$('#galleryHeader').html(name);
-	
 	loginUser();
-
-
 }
 
 function continueLogin() {
@@ -141,6 +138,7 @@ function loginUser() {
 	   FB.login(function(response) {
 	   	if (response.authResponse) {
 	   		getFriendInfo();
+
 	   		//window.location ="index.php";
 	   }
 	   	else {
@@ -164,6 +162,7 @@ function getFriendInfo() {
 			}
 	    	localStorage.setItem('friends', friendString);
 			localStorage.setItem('numFriends', response.length);
+
 			continueLogin(); 
 	});
 }

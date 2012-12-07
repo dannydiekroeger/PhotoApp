@@ -14,6 +14,7 @@ if (move_uploaded_file($_FILES['image_file']['tmp_name'], "uploads/".$_FILES['im
 
 }
 echo <<<EOF
+<p>Yo the file is chill </p>
 <p>Your file: {$sFileName} has been successsfully received.</p>
 <p>Type: {$sFileType}</p>
 <p>Size: {$sFileSize}</p>

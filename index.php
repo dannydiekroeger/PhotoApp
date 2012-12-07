@@ -5,7 +5,7 @@
 <!-- cboskii baby!! Jamin-->
 
 <head>
-<script src="//cdn.optimizely.com/js/141863837.js"></script>
+
 	<title>Trail Mix</title> 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,7 +27,7 @@
 	<link href="3.0.5/examples/jquery-mobile.css" type="text/css" rel="stylesheet" />
 	
 	<link href="css/main.css" rel="stylesheet" type="text/css" />
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 	<script src="uploadscript.js"></script>
 	
 	<script>
@@ -39,6 +39,11 @@
 			$(".numFriends").html(localStorage.getItem('numFriends'));
 		}
 	</script>
+	
+
+	
+	
+	
 </head> 
 <body onload="load()";>
 
@@ -69,7 +74,7 @@
 		$result = mysql_query($query);
 		$row = mysql_fetch_assoc($result);
 		if($row == NULL) {
-			echo "Add your first album ------^";
+			echo "<h3>Add your first album (button on top right)</h3> ";
 		}
 		while($row) {
 			$current = '';
@@ -211,10 +216,11 @@
 		<form id="createalbum_form" enctype="multipart/form-data" method="post">
 			<label for="album">Album Name:</label>
 			<input type="text" name="album" id="album"/>
-			<p><a href="#friendListTest" data-role="button" data-icon="plus">Add Friends</a></p>
+			<p><a href="#friendListTest" data-role="button" data-icon="plus" data-theme="b">Add Friends</a></p>
 			
 			<div id="numFriendsChosen"></div>
 			<div id="friendsChosen"></div>
+			<div id="friendsSelected"><p>Friends Selected: none</p></div>
 			<input type="button" data-theme="b" value="Create Album" onclick="createalbum()"/>
 
 			</form>	
@@ -231,6 +237,7 @@ function createalbum() {
 	myform.action = "albumgallery.php";
 	myinput = document.createElement("input");
 	myinput.setAttribute("name", "myName");
+	myinput.setAttribute("style", "display:none");
 	myinput.setAttribute("value", localStorage.getItem("username"));
 	myform.appendChild(myinput);
 	console.log(myform);
@@ -240,19 +247,6 @@ function createalbum() {
 
 }
 </script>
-
-<!--
-<script>
-	function createAlbum() {
-		var str = document.forms['createalbum_form']['album'].value;
-		
-		$("#albumHeader").html(str);
-		document.forms['upload_form'].elements['albumname'].value = str;
-		//window.location = "#addPhoto";
-	}
-
-</script>
--->
 
 <!--Friends List Test start -->
 <div data-role="page" id="friendListTest" data-add-back-btn="true">
@@ -297,17 +291,20 @@ function chooseFriends() {
 	var num = parseInt(numtext);
 	var numChosen=0;
 	var str = '';
+	var names ='<p>Friends Selected:</p>';
 	for(var i = 0; i < num; i++) {
 		var boxid = 'checkbox-' + i.toString();
 		if($('#'+boxid).attr('checked')) {
 			var name = $("label[for="+boxid+"]").text();
 			console.log(name);
-			str = str + '<input type="text" name="friend'+numChosen.toString()+'" value="'+name+'" />';
+			str = str + '<input type="text" style="display:none" name="friend'+numChosen.toString()+'" value="'+name+'" />';
+			names = names + '<p>' + name + '</p>';
 			numChosen = numChosen + 1;
 		}
 	}
 	$("#friendsChosen").html(str);
-	$("#numFriendsChosen").html('<input type="text" name="numFriends" value="'+numChosen.toString()+'" />');
+	$("#friendsSelected").html(names);
+	$("#numFriendsChosen").html('<input type="text" style="display:none" name="numFriends" value="'+numChosen.toString()+'" />');
 	// should add these friends to the form
 	//document.getElementById("friendsChosen").innerHtml = friends.elements[0];
 	window.location ="#popup";
